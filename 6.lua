@@ -26,9 +26,9 @@ local Heartbeat = game:GetService("RunService").Heartbeat
 local LastIteration, Start
 local FrameUpdateTable = { }
 
-game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="正在加载超级无敌牛逼脚本"; Duration = 2; })wait(3)
+game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="正在加载脚本做好的脚本有更多的资源"; Duration = 2; })wait(3)
 
-game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="超级无敌牛逼公益版,收费版加我3131827878,包含了市面上大部分脚本"; Duration = 2; })wait(2)
+game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="付费版,包含了市面上大部分脚本"; Duration = 2; })wait(2)
 
 game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="载入成功"; Duration = 3; })
 
@@ -348,4 +348,46 @@ end)
 
 nSection:Button("偷走脑红朝霞", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/9178.lua"))()
+end)
+
+local bTab = window:Tab("『恐鬼症』", "7733774602")
+local bSection = bTab:section("『恐鬼症』", true)
+bSection:Button("恐鬼症", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/1111/refs/heads/main/%E6%81%90%E9%AC%BC%E7%97%87.lua"))()
+end)
+
+local gTab = window:Tab("『海战』", "7733774602")
+local gSection = gTab:section("『海战』", true)
+gSection:Button("海战", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/海战.lua"))()
+end)
+
+local hTab = window:Tab("『俄亥俄州』", "7733774602")
+local hSection = hTab:section("『ohio』", true)
+hSection:Button("俄亥俄州", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/俄亥俄州.lua"))()
+end)
+
+local qwTab = window:Tab("『监狱人生』", "7733774602")
+local qwSection = qwTab:section("『监狱人生』", true)
+qwSection:Button("监狱人生", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/监狱人生.lua"))()
+end)
+
+local bnTab = window:Tab("『奶奶』", "7733774602")
+local bnSection = bnTab:section("『奶奶』", true)
+bnSection:Button("奶奶", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/奶奶.lua"))()
+end)
+
+local buTab = window:Tab("『彩虹朋友』", "7733774602")
+local buSection = buTab:section("『彩虹朋友』", true)
+buSection:Button("彩虹朋友", function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/彩虹朋友.lua"))()
+end)
+
+local byuTab = window:Tab("『破坏者谜团』", "7733774602")
+local byuSection = byuTab:section("『破坏者谜团』", true)
+byuSection:Button("破坏者谜团", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/破坏者谜团2.lua"))()
 end)
