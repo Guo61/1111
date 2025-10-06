@@ -473,7 +473,13 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/r
 end)
 
 local kyTab = window:Tab("『自然灾害』", "7733774602")
-local kySection = kyTab:section("『自然灾害自制』", true)
-kySection:Button("自然灾害", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/LED/refs/heads/main/LED%E8%87%AA%E7%84%B6%E7%81%BE%E5%AE%B3.lua"))()
+local kySection = kyTab:section("『自然灾害黑洞』", true)
+kySection:Button("自然灾害黑洞", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V6.txt"))()
+end)
+
+local kyTab = window:Tab("『自然灾害』", "7733774602")
+local kySection = kyTab:section("『自然灾害黑洞2』", true)
+kySection:Button("自然灾害黑洞2", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E7%A3%81%E9%93%81%E9%BB%91%E6%B4%9EV2.txt"))()
 end)
