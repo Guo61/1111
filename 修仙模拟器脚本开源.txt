@@ -1,0 +1,51 @@
+local ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/hun/main/jmlibrary1.lua"))()     
+local win = ui:new("hi")
+--
+
+local UITab1 = win:Tab("『通用』",'87437251671184')
+
+local about = UITab1:section("『通用』",true)
+about:Toggle("自动捡宝箱", "Toggle", false, function(Value)
+while task.wait(1) and Value do
+for i,v in pairs(workspace.Treasure:GetChildren()) do
+if v:FindFirstChildOfClass("ProximityPrompt") then
+Prompt = v:FindFirstChildOfClass("ProximityPrompt")
+
+    if Prompt.ActionText == "宝箱" then
+fireproximityprompt(Prompt)
+end
+end
+end
+end
+end)
+about:Toggle("自动打坐", "Toggle", false, function(Value)
+while task.wait(1) and Value do
+game:GetService("ReplicatedStorage").Event.GradePromotion:FireServer("SitInMeditation")
+end
+end)
+
+about:Toggle("自动练剑", "Toggle", false, function(Value)
+while task.wait(1) and Value do
+game:GetService("ReplicatedStorage").Event.GradePromotion:FireServer("Weapon")
+end
+end)
+about:Toggle("自动练飞剑", "Toggle", false, function(Value)
+while task.wait(1) and Value do
+game:GetService("ReplicatedStorage").Event.GradePromotion:FireServer("FlyWeapon")
+end
+end)
+about:Toggle("自动拳击", "Toggle", false, function(Value)
+while task.wait(1) and Value do
+game:GetService("ReplicatedStorage").Event.GradePromotion:FireServer("Power")
+end
+end)
+about:Toggle("自动打桩", "Toggle", false, function(Value)
+while task.wait(1) and Value do
+game:GetService("ReplicatedStorage").Event.GradePromotion:FireServer("Power",workspace:FindFirstChild("\229\141\135\231\186\167"):FindFirstChild("\230\156\168\230\161\169").Body,9e9)
+end
+end)
+about:Toggle("自动射靶", "Toggle", false, function(Value)
+while task.wait(1) and Value do
+game:GetService("ReplicatedStorage").Event.GradePromotion:FireServer("FlyWeapon",workspace.Target.Location4,10e10)
+end
+end)
