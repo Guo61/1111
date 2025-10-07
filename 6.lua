@@ -2,7 +2,10 @@ local OrionLib
 local sources = {
     "https://raw.githubusercontent.com/shlexware/Orion/main/source",
     "https://pastebin.com/raw/FUEx0f3G",
-    "https://raw.githubusercontent.com/ItzzExcel/Preview/main/Orion"
+    "https://raw.githubusercontent.com/ItzzExcel/Preview/main/Orion",
+    "https://raw.githubusercontent.com/SmellOfHand/Orion/main/source",
+    "https://raw.githubusercontent.com/OrionLib/Orion/main/source",
+    "https://pastebin.com/raw/5Jp0pD0x"
 }
 
 for i, source in ipairs(sources) do
