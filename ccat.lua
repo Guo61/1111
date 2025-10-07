@@ -909,6 +909,43 @@ Extra:Button({
 
 Extra:Section({Title = "自动", Icon = "wrench"})
 
+_G.auto_hoop = false
+
+local function auto_hoop()
+    while _G.auto_hoop do
+        wait()
+        local children = workspace.Hoops:GetChildren()
+        for i, child in ipairs(children) do
+            if child.Name == "Hoop" then
+                child.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            end    
+        end
+    end
+end
+
+Extra:Toggle({
+    Title = "自动跳圈",
+    Desc = "单机以执行/关闭",
+    Default = false,
+    Callback = function(Value)
+        _G.auto_hoop = Value
+        if Value then
+            auto_hoop()
+            Window:Notify({
+                Title = "自动跳圈",
+                Desc = "自动跳圈已开启",
+                Time = 2
+            })
+        else
+            Window:Notify({
+                Title = "自动跳圈",
+                Desc = "自动跳圈已关闭",
+                Time = 2
+            })
+        end
+    end
+})
+
 Extra:Toggle({
     Title = "自动重生",
     Desc = "ARS",
@@ -1057,48 +1094,6 @@ Extra:Button({
 })
 
 Extra:Button({
-    Title = "自动收集宝石(City)",
-    Desc = "单击以执行/停止",
-    Callback = function()
-        if not isRunning then
-            spawn(function()
-                shouldStop = false
-                while true do
-                    if shouldStop then
-                        break
-                    end
-                    local args = {
-                        "collectOrb",
-                        "Gem",
-                        "City"
-                    }
-                    game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("orbEvent"):FireServer(unpack(args))
-                    wait(0.5)
-                end
-                isRunning = false
-            end)
-            isRunning = true
-            Window:Notify({
-                Title = "通知",
-                Desc = "正在执行自动收集宝石",
-                Time = 1
-            })
-        else
-            shouldStop = true
-            isRunning = false
-            Window:Notify({
-                Title = "通知",
-                Desc = "已停止自动收集宝石",
-                Time = 1
-            })
-        end
-    end
-})
-
-local isRunning = false
-local shouldStop = false
-
-Extra:Button({
     Title = "自动吃蓝球(city)",
     Desc = "单击以执行/停止",
     Callback = function()
@@ -1134,6 +1129,70 @@ Extra:Button({
                 Time = 1
             })
         end
+    end
+})
+
+Extra:Button({
+    Title = "自动卡宠",
+    Desc = "开启自动卡宠且防踢",
+    Callback = function()
+        wait(0.5)
+        local ba = Instance.new("ScreenGui")
+        local ca = Instance.new("TextLabel")
+        local da = Instance.new("Frame")
+        local _b = Instance.new("TextLabel")
+        local ab = Instance.new("TextLabel")
+        
+        ba.Parent = game.CoreGui
+        ba.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        ca.Parent = ba
+        ca.Active = true
+        ca.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+        ca.Draggable = true
+        ca.Position = UDim2.new(0.698610067, 0, 0.098096624, 0)
+        ca.Size = UDim2.new(0, 304, 0, 52)
+        ca.Font = Enum.Font.SourceSansSemibold
+        ca.Text = "自动卡宠"
+        ca.TextColor3 = Color3.new(0, 1, 1)
+        ca.TextSize = 22
+        
+        da.Parent = ca
+        da.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+        da.Position = UDim2.new(0, 0, 1.0192306, 0)
+        da.Size = UDim2.new(0, 304, 0, 107)
+        
+        _b.Parent = da
+        _b.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+        _b.Position = UDim2.new(0, 0, 0.800455689, 0)
+        _b.Size = UDim2.new(0, 304, 0, 21)
+        _b.Font = Enum.Font.Arial
+        _b.Text = "江砚辰"
+        _b.TextColor3 = Color3.new(1, 1, 1)
+        _b.TextSize = 20
+        
+        ab.Parent = da
+        ab.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+        ab.Position = UDim2.new(0, 0, 0.158377379, 0)
+        ab.Size = UDim2.new(0, 304, 0, 44)
+        ab.Font = Enum.Font.ArialBold
+        ab.Text = "自动卡宠:已开启 "
+        ab.TextColor3 = Color3.new(1, 1, 1)
+        ab.TextSize = 20
+        
+        local bb = game:service'VirtualUser'
+        game:service'Players'.LocalPlayer.Idled:connect(function()
+            bb:CaptureController()
+            bb:ClickButton2(Vector2.new())
+            ab.Text = "You went idle and ROBLOX tried to kick you but we reflected it!"
+            wait(2)
+            ab.Text = "Script Re-Enabled"
+        end)
+        
+        Window:Notify({
+            Title = "自动卡宠",
+            Desc = "自动卡宠脚本已开启，防踢功能已激活",
+            Time = 3
+        })
     end
 })
 
