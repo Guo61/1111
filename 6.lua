@@ -233,4 +233,7 @@ kwTab:AddButton({Name = "元素大亨", Callback = function() loadstring(game:Ht
 local kuTab = Window:MakeTab({Name = "『自然灾害黑洞』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 kuTab:AddButton({Name = "黑洞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V6.txt"))() end})
 
+local mneTab = Window:MakeTab({Name = "『建造一架飞机』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+mneTab:AddButton({Name = "刷钱", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%BB%BA%E9%80%A0%E4%B8%80%E6%9E%B6%E9%A3%9E%E6%9C%BA"))()end})
+
 OrionLib:Init()
