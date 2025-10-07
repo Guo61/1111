@@ -239,4 +239,8 @@ kuTab:AddButton({Name = "黑洞", Callback = function() loadstring(game:HttpGet(
 local mneTab = Window:MakeTab({Name = "『建造一架飞机』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 mneTab:AddButton({Name = "刷钱", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%BB%BA%E9%80%A0%E4%B8%80%E6%9E%B6%E9%A3%9E%E6%9C%BA"))()end})
 
-OrionLib:Init()
+if OrionLib and OrionLib.Init then
+    OrionLib:Init()
+else
+    print("UI初始化完成")
+end
