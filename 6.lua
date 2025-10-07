@@ -478,8 +478,26 @@ kySection:Button("自然灾害黑洞", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V6.txt"))()
 end)
 
-local kyTab = window:Tab("『自然灾害』", "7733774602")
-local kySection = kyTab:section("『自然灾害黑洞2』", true)
-kySection:Button("自然灾害黑洞2", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E7%A3%81%E9%93%81%E9%BB%91%E6%B4%9EV2.txt"))()
+local kyyTab = window:Tab("『元素大亨』", "7733774602")
+local kyySection = kyyTab:section("『元素大亨』", true)
+kyySection:Button("元素大亨自制", function()il
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%85%83%E7%B4%A0%E5%8A%9B%E9%87%8F%E5%A4%A7%E4%BA%A8.lua"))()
+end)
+
+local yyyTab = window:Tab("『黑暗欺骗』", "7733774602")
+local yyySection = yyyTab:section("『黑暗欺骗』", true)
+yyySection:Button("黑暗欺骗", function()il
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/Hunted.lua"))()
+end)
+
+local kykTab = window:Tab("『EME』", "7733774602")
+local kykSection = kykTab:section("『EME』", true)
+kykSection:Button("EME", function()il
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/Emergency-Hamburg.lua"))()
+end)
+
+local kuTab = window:Tab("『动物捉迷藏』", "7733774602")
+local kuSection = kuTab:section("『动物捉迷藏』", true)
+kuSection:Button("动物捉迷藏", function()il
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%8A%A8%E7%89%A9%E6%8D%89%E8%BF%B7%E8%97%8F.lua"))()
 end)
