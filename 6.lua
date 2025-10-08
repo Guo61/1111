@@ -1,3 +1,906 @@
+local success, Library = pcall(function()
+    return loadstring(game:HttpGet("https://raw.githubusercontent.com/x2zu/OPEN-SOURCE-UI-ROBLOX/refs/heads/main/X2ZU%20UI%20ROBLOX%20OPEN%20SOURCE/DummyUi-leak-by-x2zu/fetching-main/Tools/Framework.luau"))()
+end)
+
+if not success or not Library then
+    Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/Library.lua"))()
+end
+
+local Window = Library:Window({
+    Title = "郝蕾脚本 v2.3",
+    Desc = "付费版,包含了市面上大部分脚本",
+    Icon = "skull",
+    Theme = "Dark",
+    Config = {
+        Keybind = Enum.KeyCode.LeftControl,
+        Size = UDim2.new(0, 500, 0, 350)
+    },
+    CloseUIButton = {
+        Enabled = true,
+        Text = "打开/关闭"
+    }
+})
+
+game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="正在加载脚本做好的脚本有更多的资源"; Duration = 2; })wait(3)
+game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="付费版,包含了市面上大部分脚本"; Duration = 2; })wait(2)
+game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="载入成功"; Duration = 3; })
+
+local MainTab = Window:Tab({Title = "主页", Icon = "crown"})
+
+MainTab:Section({Title = "账户信息"})
+MainTab:Button({
+    Title = "显示账户信息", 
+    Description = "点击查看详细信息",
+    Callback = function()
+        Window:Notify({
+            Title = "账户信息",
+            Desc = "郝蕾脚本\n作者：郝蕾\n师傅江砚辰\n作者qq3131827878\n你的账号:"..player.AccountAge.."世纪\n你的用户名:"..game.Players.LocalPlayer.Character.Name.."\n服务器名称:"..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
+            Time = 10
+        })
+    end
+})
+
+MainTab:Section({Title = "通用功能"})
+
+MainTab:Button({
+    Title = "设备信息",
+    Description = "显示当前设备信息",
+    Callback = function()
+        local function identifyDevice()
+            local userInputService = game:GetService("UserInputService")
+            local platform = userInputService:GetPlatform()
+            
+            if platform == Enum.Platform.Windows or platform == Enum.Platform.OSX or platform == Enum.Platform.Linux then
+                return "电脑 (PC)"
+            elseif platform == Enum.Platform.IOS then
+                return "移动端 (iOS)"
+            elseif platform == Enum.Platform.Android then
+                return "移动端 (Android)"
+            elseif platform == Enum.Platform.XBoxOne or platform == Enum.Platform.PS4 then
+                return "游戏主机"
+            else
+                return "其他设备"
+            end
+        end
+        
+        Window:Notify({
+            Title = "设备信息",
+            Desc = "当前设备: " .. identifyDevice(),
+            Time = 5
+        })
+    end
+})
+
+MainTab:Button({  
+    Title = "反挂机",  
+    Desc = "不要随意开启!",  
+    Description = "从Github加载并执行反挂机",  
+    Callback = function()  
+        Window:Notify({  
+            Title = "郝蕾脚本",  
+            Desc = "正在加载反挂机脚本...",  
+            Time = 3  
+        })  
+
+        local url = "https://raw.githubusercontent.com/Guo61/Cat-/refs/heads/main/%E5%8F%8D%E6%8C%82%E6%9C%BA.lua"
+
+        local success, response = pcall(function()  
+            return game:HttpGet(url, true)  
+        end)  
+
+        if success and response and #response > 100 then  
+            local executeSuccess, executeError = pcall(function()  
+                loadstring(response)()  
+            end)  
+
+            if executeSuccess then  
+                Window:Notify({  
+                    Title = "郝蕾脚本",  
+                    Desc = "反挂机脚本加载并执行成功!",  
+                    Time = 5  
+                })  
+            else  
+                Window:Notify({  
+                    Title = "郝蕾脚本",  
+                    Desc = "脚本执行错误: " .. tostring(executeError),  
+                    Time = 5  
+                })  
+            end  
+
+        else  
+            Window:Notify({  
+                Title = "郝蕾脚本",  
+                Desc = "反挂机脚本加载失败，请检查网络",  
+                Time = 5  
+            })  
+        end  
+    end  
+})
+
+MainTab:Button({
+    Title = "显示FPS",
+    Description = "在屏幕上显示当前FPS",
+    Callback = function()
+        local FpsGui = Instance.new("ScreenGui") 
+        local FpsXS = Instance.new("TextLabel") 
+        FpsGui.Name = "FPSGui" 
+        FpsGui.ResetOnSpawn = false 
+        FpsGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling 
+        FpsXS.Name = "FpsXS" 
+        FpsXS.Size = UDim2.new(0, 100, 0, 50) 
+        FpsXS.Position = UDim2.new(0, 10, 0, 10) 
+        FpsXS.BackgroundTransparency = 1 
+        FpsXS.Font = Enum.Font.SourceSansBold 
+        FpsXS.Text = "FPS: 0" 
+        FpsXS.TextSize = 20 
+        FpsXS.TextColor3 = Color3.new(1, 1, 1) 
+        FpsXS.Parent = FpsGui 
+        
+        local function updateFpsXS()
+            local fps = math.floor(1 / game:GetService("RunService").RenderStepped:Wait())
+            FpsXS.Text = "FPS: " .. fps
+        end 
+        
+        game:GetService("RunService").RenderStepped:Connect(updateFpsXS) 
+        FpsGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        
+        Window:Notify({
+            Title = "郝蕾脚本",
+            Desc = "FPS显示已开启",
+            Time = 3
+        })
+    end
+})
+
+MainTab:Toggle({
+    Title = "显示范围",
+    Desc = "显示玩家范围",
+    Callback = function(state)
+        local HeadSize = 20
+        local highlight = Instance.new("Highlight")
+        highlight.Adornee = nil
+        highlight.OutlineTransparency = 0
+        highlight.FillTransparency = 0.7
+        highlight.FillColor = Color3.fromHex("#0000FF")
+
+        local function applyHighlight(character)
+            if not character:FindFirstChild("RangeHighlight") then
+                local clone = highlight:Clone()
+                clone.Adornee = character
+                clone.Name = "RangeHighlight"
+                clone.Parent = character
+            end
+        end
+
+        local function removeHighlight(character)
+            local h = character:FindFirstChild("RangeHighlight")
+            if h then
+                h:Destroy()
+            end
+        end
+
+        if state then
+            for _, player in ipairs(game.Players:GetPlayers()) do
+                if player.Name ~= game.Players.LocalPlayer.Name and player.Character then
+                    applyHighlight(player.Character)
+                end
+            end
+            game.Players.PlayerAdded:Connect(function(player)
+                player.CharacterAdded:Connect(function(character)
+                    task.wait(1)
+                    applyHighlight(character)
+                end)
+            end)
+            game.Players.PlayerRemoving:Connect(function(player)
+                if player.Character then
+                    removeHighlight(player.Character)
+                end
+            end)
+        else
+            for _, player in ipairs(game.Players:GetPlayers()) do
+                if player.Character then
+                    removeHighlight(player.Character)
+                end
+            end
+        end
+    end
+})
+
+MainTab:Button({
+    Title = "半隐身",
+    Desc = "悬浮窗关不掉",
+    Description = "从GitHub加载并执行隐身脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invisible-35376"))()
+    end
+})
+
+MainTab:Button({
+    Title = "玩家入退提示",
+    Description = "从GitHub加载并执行提示脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/boyscp/scriscriptsc/main/bbn.lua"))()
+    end
+})
+
+MainTab:Button({
+    Title = "甩飞",
+    Description = "从GitHub加载并执行甩飞脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
+    end
+})
+
+local antiWalkFlingConn
+local function enableAntiWalkFling()
+    if antiWalkFlingConn then
+        antiWalkFlingConn:Disconnect()
+    end
+    
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+
+    local MAX_VELOCITY_MAGNITUDE = 80
+    local TELEPORT_BACK_ON_FLING = true
+    local lastPositions = {}
+
+    Players.PlayerAdded:Connect(function(player)
+        player.CharacterAdded:Connect(function(character)
+            local humanoid = character:WaitForChild("Humanoid")
+            local rootPart = character:WaitForChild("HumanoidRootPart")
+
+            humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
+            humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+            
+            lastPositions[player.UserId] = rootPart.Position
+        end)
+    end)
+
+    antiWalkFlingConn = RunService.Heartbeat:Connect(function()
+        for _, player in ipairs(Players:GetPlayers()) do
+            local character = player.Character
+            if character then
+                local rootPart = character:FindFirstChild("HumanoidRootPart")
+                local humanoid = character:FindFirstChild("Humanoid")
+                
+                if rootPart and humanoid and humanoid.Health > 0 then
+                    local currentVelocity = rootPart.AssemblyLinearVelocity
+                    local velocityMagnitude = currentVelocity.Magnitude
+
+                    if velocityMagnitude > MAX_VELOCITY_MAGNITUDE then
+                        if TELEPORT_BACK_ON_FLING and lastPositions[player.UserId] then
+                            rootPart.CFrame = CFrame.new(lastPositions[player.UserId])
+                        end
+                        
+                        rootPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                    else
+                        lastPositions[player.UserId] = rootPart.Position
+                    end
+                end
+            end
+        end
+    end)
+end
+
+local function disableAntiWalkFling()
+    if antiWalkFlingConn then
+        antiWalkFlingConn:Disconnect()
+        antiWalkFlingConn = nil
+    end
+end
+
+MainTab:Toggle({
+    Title = "防甩飞",
+    Desc = "不要和甩飞同时开启!",
+    Callback = function(state)
+        if state then
+            enableAntiWalkFling()
+            Window:Notify({
+                Title = "防甩飞",
+                Desc = "防甩飞已开启",
+                Time = 3
+            })
+        else
+            disableAntiWalkFling()
+            Window:Notify({
+                Title = "防甩飞",
+                Desc = "防甩飞已关闭",
+                Time = 3
+            })
+        end
+    end
+})
+
+local espEnabled = false
+local espConnections = {}
+local espHighlights = {}
+local espNameTags = {}
+
+local function createESP(player)
+    local char = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = char:FindFirstChild("HumanoidRootPart")
+    if not humanoidRootPart then return end
+
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "ESP"
+    highlight.Adornee = char
+    highlight.FillColor = Color3.new(1, 0, 0)
+    highlight.FillTransparency = 0.5
+    highlight.OutlineTransparency = 0
+    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    highlight.Parent = char
+    espHighlights[player] = highlight
+
+    local nameTag = Instance.new("BillboardGui")
+    nameTag.Name = "NameTag"
+    nameTag.Adornee = humanoidRootPart
+    nameTag.Size = UDim2.new(0, 150, 0, 20)
+    nameTag.StudsOffset = Vector3.new(0, 2.8, 0)
+    nameTag.AlwaysOnTop = true
+    nameTag.Parent = humanoidRootPart
+    
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.Text = player.Name
+    textLabel.TextColor3 = Color3.new(1, 1, 1)
+    textLabel.Font = Enum.Font.SourceSansBold
+    textLabel.TextSize = 14
+    textLabel.TextScaled = false
+    textLabel.Parent = nameTag
+    espNameTags[player] = nameTag
+end
+
+local function removeESP(player)
+    if espHighlights[player] and espHighlights[player].Parent then
+        espHighlights[player]:Destroy()
+        espHighlights[player] = nil
+    end
+    if espNameTags[player] and espNameTags[player].Parent then
+        espNameTags[player]:Destroy()
+        espNameTags[player] = nil
+    end
+end
+
+local function toggleESP(state)
+    espEnabled = state
+    if state then
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            if player ~= game.Players.LocalPlayer then
+                pcall(createESP, player)
+            end
+        end
+
+        espConnections.playerAdded = game.Players.PlayerAdded:Connect(function(player)
+            player.CharacterAdded:Wait()
+            pcall(createESP, player)
+        end)
+        espConnections.playerRemoving = game.Players.PlayerRemoving:Connect(function(player)
+            removeESP(player)
+        end)
+    else
+        if espConnections.playerAdded then espConnections.playerAdded:Disconnect() end
+        if espConnections.playerRemoving then espConnections.playerRemoving:Disconnect() end
+        for player, _ in pairs(espHighlights) do
+            removeESP(player)
+        end
+        espHighlights = {}
+        espNameTags = {}
+    end
+end
+
+MainTab:Toggle({
+    Title = "人物透视 (ESP)",
+    Desc = "显示其他玩家的透视框和名字",
+    Default = false,
+    Callback = toggleESP
+})
+
+local selectedPlayer = nil
+local playerDropdown
+
+local function getPlayerNames()
+    local names = {}
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player ~= game.Players.LocalPlayer then
+            table.insert(names, player.Name)
+        end
+    end
+    return names
+end
+
+playerDropdown = MainTab:Dropdown({
+    Title = "选择要传送的玩家",
+    Values = getPlayerNames(),
+    Callback = function(value)
+        selectedPlayer = value
+        Window:Notify({
+            Title = "玩家选择",
+            Desc = "已选择玩家: " .. value,
+            Time = 2
+        })
+    end
+})
+
+MainTab:Button({
+    Title = "传送至选中玩家",
+    Desc = "传送到选中的玩家",
+    Callback = function()
+        if not selectedPlayer then
+            Window:Notify({
+                Title = "传送失败",
+                Desc = "请先选择一个玩家",
+                Time = 3
+            })
+            return
+        end
+        
+        local targetPlayer = game.Players:FindFirstChild(selectedPlayer)
+        if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+            humanoidRootPart.CFrame = targetPlayer.Character.HumanoidRootPart.CFrame
+            Window:Notify({
+                Title = "传送成功",
+                Desc = "已传送到玩家: " .. selectedPlayer,
+                Time = 3
+            })
+        else
+            Window:Notify({
+                Title = "传送失败",
+                Desc = "无法找到目标玩家或玩家没有角色",
+                Time = 3
+            })
+        end
+    end
+})
+
+MainTab:Button({
+    Title = "刷新玩家列表",
+    Desc = "手动刷新可传送的玩家列表",
+    Callback = function()
+        local newPlayers = getPlayerNames()
+        Window:Notify({
+            Title = "玩家列表",
+            Desc = "玩家列表已刷新，当前玩家数: " .. (#newPlayers),
+            Time = 3
+        })
+    end
+})
+
+MainTab:Slider({
+    Title = "设置速度",
+    Desc = "可输入",
+    Min = 0,
+    Max = 520,
+    Rounding = 0,
+    Value = 25,
+    Callback = function(val)
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character then
+            character = player.CharacterAdded:Wait()
+        end
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid.WalkSpeed = val
+        end
+    end
+})
+
+MainTab:Slider({
+    Title = "设置个人重力",
+    Desc = "默认值即为最大值",
+    Min = 0,
+    Max = 196.2,
+    Rounding = 1,
+    Value = 196.2,
+    Callback = function(val)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart", 10) 
+        if not rootPart then
+            return
+        end
+
+        local oldGravity = rootPart:FindFirstChild("PersonalGravity")
+        if oldGravity then
+            oldGravity:Destroy()
+        end
+
+        if val ~= workspace.Gravity then
+            local personalGravity = Instance.new("BodyForce")
+            personalGravity.Name = "PersonalGravity"
+            local mass = rootPart:GetMass()
+            local force = Vector3.new(0, mass * (workspace.Gravity - val), 0)
+            personalGravity.Force = force
+            personalGravity.Parent = rootPart
+        end
+    end
+})
+
+MainTab:Slider({
+    Title = "设置跳跃高度",
+    Desc = "可输入",
+    Min = 0,
+    Max = 200,
+    Rounding = 0,
+    Value = 50,
+    Callback = function(val)
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character then
+            character = player.CharacterAdded:Wait()
+        end
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid.JumpPower = val
+        end
+    end
+})
+
+MainTab:Button({
+    Title = "飞行",
+    Description = "从GitHub加载并执行飞行脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/Cat-/refs/heads/main/%E9%A3%9E%E8%A1%8C%E8%84%9A%E6%9C%AC.lua"))()
+    end
+})
+
+MainTab:Button({
+    Title = "无限跳",
+    Desc = "概率关不了",
+    Description = "从GitHub加载并执行无限跳脚本",
+    Callback = function()
+       loadstring(game:HttpGet("https://pastebin.com/raw/V5PQy3y0", true))()
+    end
+})
+
+MainTab:Button({
+    Title = "自瞄",
+    Desc = "宙斯自瞄",
+    Description = "从GitHub加载并执行自瞄脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20Aimbot.lua"))()
+    end
+})
+
+MainTab:Toggle({
+    Title = "子弹追踪",
+    Default = false,
+    Callback = function(state)
+    end
+})
+
+MainTab:Toggle({
+    Title = "夜视",
+    Default = false,
+    Callback = function(isEnabled)
+        if isEnabled then
+            game.Lighting.Ambient = Color3.new(1, 1, 1)
+        else
+            game.Lighting.Ambient = Color3.new(0, 0, 0)
+        end
+    end
+})
+
+MainTab:Toggle({
+    Title = "穿墙",
+    Default = false,
+    Callback = function(NC)
+    end
+})
+
+MainTab:Section({Title = "服务器功能"})
+
+MainTab:Button({
+    Title = "切换服务器",
+    Desc = "切换到相同游戏的另一个服务器",
+    Callback = function()
+        local TeleportService = game:GetService("TeleportService")
+        local placeId = game.PlaceId
+        
+        TeleportService:Teleport(placeId, game.Players.LocalPlayer)
+        Window:Notify({
+            Title = "服务器",
+            Desc = "正在切换服务器...",
+            Time = 3
+        })
+    end
+})
+
+MainTab:Button({
+    Title = "重新加入服务器",
+    Desc = "尝试重新加入当前服务器",
+    Callback = function()
+        local TeleportService = game:GetService("TeleportService")
+        local placeId = game.PlaceId
+        local jobId = game.JobId
+        
+        TeleportService:TeleportToPlaceInstance(placeId, jobId, game.Players.LocalPlayer)
+        Window:Notify({
+            Title = "服务器",
+            Desc = "正在重新加入服务器...",
+            Time = 3
+        })
+    end
+})
+
+MainTab:Button({
+    Title = "复制服务器邀请链接",
+    Desc = "复制当前服务器的邀请链接到剪贴板",
+    Callback = function()
+        local inviteLink = "roblox://experiences/start?placeId=" .. game.PlaceId .. "&gameInstanceId=" .. game.JobId
+        setclipboard(inviteLink)
+        Window:Notify({
+            Title = "服务器",
+            Desc = "邀请链接已复制到剪贴板",
+            Time = 3
+        })
+    end
+})
+
+MainTab:Button({
+    Title = "复制服务器ID",
+    Desc = "复制当前服务器的Job ID到剪贴板",
+    Callback = function()
+        setclipboard(game.JobId)
+        Window:Notify({
+            Title = "服务器",
+            Desc = "服务器ID已复制: " .. game.JobId,
+            Time = 3
+        })
+    end
+})
+
+MainTab:Button({
+    Title = "服务器信息",
+    Desc = "显示当前服务器的信息",
+    Callback = function()
+        local players = game.Players:GetPlayers()
+        local maxPlayers = game.Players.MaxPlayers
+        local placeId = game.PlaceId
+        local jobId = game.JobId
+        local serverType = game:GetService("RunService"):IsStudio() and "Studio" or "Live"
+        
+        Window:Notify({
+            Title = "服务器信息",
+            Desc = string.format("玩家数量: %d/%d\nPlace ID: %d\nJob ID: %s\n服务器类型: %s", #players, maxPlayers, placeId, jobId, serverType),
+            Time = 10
+        })
+    end
+})
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
+    character:WaitForChild("HumanoidRootPart", 10)
+    local rootPart = character:FindFirstChild("HumanoidRootPart")
+    if rootPart then
+        local oldGravity = rootPart:FindFirstChild("PersonalGravity")
+        if oldGravity then
+            oldGravity:Destroy()
+        end
+    end
+end)
+
+local ScriptsTab = Window:Tab({Title = "脚本合集", Icon = "zap"})
+ScriptsTab:Button({Title = "鱼脚本", Callback = function()
+    loadstring(game:HelpGet(utf8.char((function() return table.unpack({104,116,116,112,115,58,47,47,115,104,122,46,97,108,47,126,70,105,115,104,83,99,114,105,112,116,78,101,119})end)())))();
+end})
+ScriptsTab:Button({Title = "皮脚本", Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaopi77/xiaopi77/main/QQ1002100032-Roblox-Pi-script.lua"))()
+end})
+ScriptsTab:Button({Title = "星河脚本", Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/AWDX-DYVB/test/main/%E6%B2%B3%E6%B5%81%E6%97%A0%E5%AF%86%E9%92%A5.lua"))()
+end})
+ScriptsTab:Button({Title = "静心脚本", Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/jxdjbx/gggggghjjnbb/main/jdjdd"))()
+end})
+ScriptsTab:Button({Title = "冷脚本", Callback = function()
+    getgenv().Leng="冷脚本QQ群815883059" loadstring(game:HttpGet("https://raw.githubusercontent.com/odhdshhe/lenglenglenglenglenglenglenglenglenglenglengleng-cold-script-LBT-H/refs/heads/main/LENG-cold-script-LBT-H.txt"))()
+end})
+ScriptsTab:Button({Title = "XK脚本", Callback = function()
+    loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\121\99\103\99\104\103\121\102\121\116\100\116\116\114\47\115\104\101\110\113\105\110\47\114\101\102\115\47\104\101\97\100\115\47\109\97\105\110\47\72\69\46\108\117\97\34\41\41\40\41")()
+end})
+ScriptsTab:Button({Title = "也是脚本但不知道名", Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/KwARpDxV",true))()
+end})
+ScriptsTab:Button({Title = "动感星期五", Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/KwARpDxV",true))()
+end})
+
+local UniversalTab = Window:Tab({Title = "通用", Icon = "zap"})
+UniversalTab:Button({Title = "甩人", Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
+end})
+UniversalTab:Button({Title = "替身", Callback = function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/SkrillexMe/SkrillexLoader/main/SkrillexLoadMain')))()
+end})
+UniversalTab:Button({Title = "爬墙", Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+end})
+UniversalTab:Button({Title = "汉化阿尔宙斯自瞄", Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/sgbs/main/%E4%B8%81%E4%B8%81%20%E6%B1%89%E5%8C%96%E8%87%AA%E7%9E%84.txt"))()
+end})
+UniversalTab:Button({Title = "工具挂", Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Bebo-Mods/BeboScripts/main/StandAwekening.lua"))()
+end})
+UniversalTab:Button({Title = "甩飞", Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/hknvh/main/%E7%94%A9%E9%A3%9E.txt"))()
+end})
+UniversalTab:Button({Title = "铁拳", Callback = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'))()
+end})
+UniversalTab:Slider({Title = "设置重力", Min = 196.2, Max = 1000, Default = 196.2, Rounding = 1, Value = 196.2, Callback = function(val) game.Workspace.Gravity = val end})
+UniversalTab:Slider({Title = "跳跃高度", Min = 50, Max = 400, Default = 50, Rounding = 0, Value = 50, Callback = function(val) spawn(function() while task.wait() do game.Players.LocalPlayer.Character.Humanoid.JumpPower = val end end) end})
+UniversalTab:Slider({Title = "步行速度", Min = 16, Max = 400, Default = 16, Rounding = 0, Value = 16, Callback = function(val) spawn(function() while task.wait() do game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = val end end) end})
+UniversalTab:Toggle({Title = "夜视", Default = false, Callback = function(Value) if Value then game.Lighting.Ambient = Color3.new(1, 1, 1) else game.Lighting.Ambient = Color3.new(0, 0, 0) end end})
+
+local autoInteract = false
+UniversalTab:Toggle({Title = "自动互动", Default = false, Callback = function(state)
+    autoInteract = state
+    if state then
+        while autoInteract do
+            for _, descendant in pairs(workspace:GetDescendants()) do
+                if descendant:IsA("ProximityPrompt") then
+                    fireproximityprompt(descendant)
+                end
+            end
+            task.wait(0.25)
+        end
+    end
+end})
+
+local DoorsTab = Window:Tab({Title = "doors", Icon = "zap"})
+DoorsTab:Button({Title = "最强汉化", Callback = function() loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\112\97\115\116\101\98\105\110\46\99\111\109\47\114\97\119\47\54\53\84\119\84\56\106\97"))() end})
+
+local NinjaTab = Window:Tab({Title = "忍者传奇", Icon = "zap"})
+NinjaTab:Button({Title = "忍者传奇1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/-/refs/heads/main/hao1.lua"))() end})
+NinjaTab:Button({Title = "传送", Callback = function() loadstring(game:HttpGet("https://pastebin.com/raw/UzaUDSPK"))() end})
+
+local PrisonTab = Window:Tab({Title = "越狱", Icon = "zap"})
+PrisonTab:Button({Title = "越狱", Callback = function() loadstring(game:GetObjects("rbxassetid://3762448307")[1].Source)() end})
+
+local SpeedTab = Window:Tab({Title = "极速传奇", Icon = "zap"})
+SpeedTab:Button({Title = "1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/TtmScripter/GoodScript/main/LegendOfSpeed(Chinese)"))() end})
+SpeedTab:Button({Title = "2", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/TtmScripter/Legend-of-Speed-Auto-/main/GetPet"))() end})
+
+local PressureTab = Window:Tab({Title = "『压力』", Icon = "zap"})
+PressureTab:Button({Title = "压力1", Callback = function() loadstring(game:HttpGet("https://pastebin.com/raw/Ej3U4LbA"))() end})
+PressureTab:Button({Title = "压力2", Callback = function() loadstring(game:HttpGet(('https://github.com/DocYogurt/Main/raw/main/Scripts/Pressure')))() end})
+
+local DustyTab = Window:Tab({Title = "『尘土飞扬的旅行』", Icon = "zap"})
+DustyTab:Button({Title = "尘土飞扬的旅行1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/AbdouGG/dustytripv1/main/beta"))() end})
+DustyTab:Button({Title = "尘土飞扬的旅行2", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/artemy133563/Utilities/main/ADustyTrip",true))() end})
+
+local DeathBallTab = Window:Tab({Title = "『死亡球』", Icon = "zap"})
+DeathBallTab:Button({Title = "死亡球1", Callback = function() loadstring(game:HttpGet("https://github.com/Hosvile/InfiniX/releases/latest/download/main.lua",true))() end})
+
+local CarDealerTab = Window:Tab({Title = "『汽车经销大亨』", Icon = "zap"})
+CarDealerTab:Button({Title = "刷星星", Callback = function() loadstring(game:HttpGet("https://scriptblox.com/raw/LIMITED!-Car-Dealership-Tycoon-Moon-Team-16181"))() end})
+CarDealerTab:Button({Title = "汽车经销大亨1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/IExpIoit/Script/main/Car%20Dealership%20Tycoon.lua"))() end})
+
+local LumberTab = Window:Tab({Title = "『伐木大亨』", Icon = "zap"})
+LumberTab:Button({Title = "伐木大亨1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoYunCN/UWU/main/LuaWare.lua", true))() end})
+
+local AXTab = Window:Tab({Title = "『AX』", Icon = "zap"})
+AXTab:Button({Title = "ax所有功能内有ohio", Callback = function() loadstring(game:HttpGet("https://raw.gitcode.com/Xingtaiduan/Scripts/raw/main/Loader.lua"))() end})
+
+local ChineseTab = Window:Tab({Title = "『郝蕾脚本大全』", Icon = "zap"})
+ChineseTab:Button({Title = "99虚空", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/99%E5%A4%9C%E8%99%9A%E7%A9%BA.txt"))() end})
+ChineseTab:Button({Title = "死铁轨", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E6%AD%BB%E9%93%81%E8%BD%A8.lua"))() end})
+ChineseTab:Button({Title = "墨水游戏", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E6%B1%89%E5%8C%96%E5%A2%A8%E6%B0%B4Ringta.txt"))() end})
+ChineseTab:Button({Title = "活了7天", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E4%B8%83%E6%97%A5%E7%94%9F%E6%88%90kkk.txt"))() end})
+ChineseTab:Button({Title = "BF", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/bf.txt"))() end})
+ChineseTab:Button({Title = "偷走脑红", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/hdjsjjdgrhj/script-hub/refs/heads/main/偷走脑红"))() end})
+ChineseTab:Button({Title = "战争大亨", Callback = function() loadstring(game:HttpGet("https://pastefy.app/hDfjNmLP/raw"))() end})
+ChineseTab:Button({Title = "DOORs", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/VelocityX.lua"))() end})
+ChineseTab:Button({Title = "跳跃对决", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E8%B7%B3%E8%B7%83%E5%AF%B9%E5%86%B3.txt"))() end})
+ChineseTab:Button({Title = "刀刃球", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/ArgonHubX.lua"))() end})
+ChineseTab:Button({Title = "造船寻宝", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/zcxb.lua"))() end})
+ChineseTab:Button({Title = "自然灾害", Callback = function() loadstring(game:HttpGet'https://raw.githubusercontent.com/RunDTM/ZeeroxHub/main/Loader.lua')() end})
+ChineseTab:Button({Title = "最强战场隐身", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/VexonHub%E6%B1%89%E5%8C%96.txt"))() end})
+ChineseTab:Button({Title = "最强战场无视平a", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/10tempest01/tempest-hub/refs/heads/main/Launcher.lua"))() end})
+ChineseTab:Button({Title = "最强战场火车头", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/ATrainSounds/refs/heads/main/ATrain.lua"))() end})
+
+local csTab = Window:Tab({Title = "『无敌少侠飞行R15』", Icon = "zap"})
+csTab:Button({Title = "飞行1", Callback = function() loadstring(game:HttpGet("https://gist.githubusercontent.com/JungleScripts/8dc95c7ce10e86d353d606334a77de88/raw/08f3e2967701463da36f2fc28e9943e63799dd3f/gistfile1.txt"))() end})
+csTab:Button({Title = "飞行2", Callback = function() loadstring(game:HttpGet("https://gist.githubusercontent.com/JungleScripts/775c6366d91d39fe2633c5805a1d0c23/raw/c8de949402393510a27bcf4482c957b6c3bed2c2/gistfile1.txt"))() end})
+csTab:Button({Title = "飞行不能停下来", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invinicible-Flight-R15-45414"))() end})
+
+local lolTab = Window:Tab({Title = "『吃掉世界』", Icon = "zap"})
+lolTab:Button({Title = "ccat", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/LED/refs/heads/main/%E5%90%83%E7%95%8C.lua"))() end})
+
+local fytTab = Window:Tab({Title = "『终极战场』", Icon = "zap"})
+fytTab:Button({Title = "Xi PRO", Callback = function() loadstring(game:HttpGet("http://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/免费/终极战场.lua"))() end})
+
+local nTab = Window:Tab({Title = "『偷走脑红朝霞』", Icon = "zap"})
+nTab:Button({Title = "偷走脑红朝霞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/7891.lua"))() end})
+nTab:Button({Title = "朝霞免费私服", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/yoursvexyyy/VEX-OP/refs/heads/main/free%20server%20finder"))() end})
+nTab:Button({Title = "偷走脑红朝霞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/9178.lua"))() end})
+
+local bTab = Window:Tab({Title = "『恐鬼症』", Icon = "zap"})
+bTab:Button({Title = "恐鬼症", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/1111/refs/heads/main/%E6%81%90%E9%AC%BC%E7%97%87.lua"))() end})
+
+local gTab = Window:Tab({Title = "『海战』", Icon = "zap"})
+gTab:Button({Title = "海战", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/海战.lua"))() end})
+
+local hTab = Window:Tab({Title = "『俄亥俄州』", Icon = "zap"})
+hTab:Button({Title = "俄亥俄州", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/俄亥俄州.lua"))() end})
+
+local qwTab = Window:Tab({Title = "『监狱人生』", Icon = "zap"})
+qwTab:Button({Title = "监狱人生", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/监狱人生.lua"))() end})
+
+local bnTab = Window:Tab({Title = "『奶奶』", Icon = "zap"})
+bnTab:Button({Title = "奶奶", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/奶奶.lua"))() end})
+
+local buTab = Window:Tab({Title = "『彩虹朋友』", Icon = "zap"})
+buTab:Button({Title = "彩虹朋友", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/彩虹朋友.lua"))() end})
+
+local byuTab = Window:Tab({Title = "『破坏者谜团』", Icon = "zap"})
+byuTab:Button({Title = "破坏者谜团", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/破坏者谜团2.lua"))() end})
+
+local bytuTab = Window:Tab({Title = "『死亡之夜』", Icon = "zap"})
+bytuTab:Button({Title = "死亡之夜", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/-/refs/heads/main/%E6%AD%BB%E4%BA%A1%E4%B9%8B%E6%AD%BB(%E5%A4%9A%E5%96%9D%E6%B0%B4%E6%B1%89%E5%8C%96).lua"))() end})
+
+local bkTab = Window:Tab({Title = "『巴掌大战』", Icon = "zap"})
+bkTab:Button({Title = "巴掌大战", Callback = function() loadstring(game:HttpGet(("https://raw.githubusercontent.com/Dusty1234567890/Guide/main/Guide")))() end})
+
+local bmuTab = Window:Tab({Title = "『修仙模拟器』", Icon = "zap"})
+bmuTab:Button({Title = "修仙模拟器", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/1111/refs/heads/main/%E4%BF%AE%E4%BB%99%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%84%9A%E6%9C%AC%E5%BC%80%E6%BA%90.txt"))() end})
+
+local bmruTab = Window:Tab({Title = "『格蕾丝』", Icon = "zap"})
+bmruTab:Button({Title = "格蕾丝", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoXuAnZang/XKscript/refs/heads/main/GraceXJ.lua"))() end})
+
+local bfuTab = Window:Tab({Title = "『一路向西』", Icon = "zap"})
+bfuTab:Button({Title = "一路向西", Callback = function() loadstring(game:HttpGet("https://pastebin.com/raw/0SKKXLB7"))() end})
+
+local bnuTab = Window:Tab({Title = "『FPE』", Icon = "zap"})
+bnuTab:Button({Title = "FPE", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/FPE-S.lua"))() end})
+
+local biuTab = Window:Tab({Title = "『种植花园』", Icon = "zap"})
+biuTab:Button({Title = "走马观灯", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E8%8A%B1%E5%9B%AD.lua"))() end})
+
+local bcuTab = Window:Tab({Title = "『在超市生活一周』", Icon = "zap"})
+bcuTab:Button({Title = "缝合出品", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%9C%A8%E8%B6%85%E5%B8%82%E7%94%9F%E6%B4%BB%E4%B8%80%E5%91%A8.lua"))() end})
+
+local bitTab = Window:Tab({Title = "『住宅大屠杀』", Icon = "zap"})
+bitTab:Button({Title = "缝合出品", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E4%BD%8F%E5%AE%85%E5%A4%A7%E5%B1%A0%E6%9D%80.lua"))() end})
+
+local bruTab = Window:Tab({Title = "『矿井』", Icon = "zap"})
+bruTab:Button({Title = "缝合出品", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E7%9F%BF%E4%BA%95.lua"))() end})
+
+local miuTab = Window:Tab({Title = "『河北唐县』", Icon = "zap"})
+miuTab:Button({Title = "缝合出品", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/a%20%E6%B2%B3%E5%8C%97%E5%94%90%E5%8E%BF.lua"))() end})
+
+local tuTab = Window:Tab({Title = "『战斗勇士』", Icon = "zap"})
+tuTab:Button({Title = "自制", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E6%88%98%E6%96%97%E5%8B%87%E5%A3%AB.lua"))() end})
+
+local bsTab = Window:Tab({Title = "『躲避』", Icon = "zap"})
+bsTab:Button({Title = "躲避", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E8%BA%B2%E9%81%BF.lua"))() end})
+
+local byTab = Window:Tab({Title = "『植物大战僵尸』", Icon = "zap"})
+byTab:Button({Title = "朝霞汉化", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/7878"))() end})
+
+local kyTab = Window:Tab({Title = "『墨水游戏』", Icon = "zap"})
+kyTab:Button({Title = "墨水游戏", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/墨水游戏.lua"))() end})
+
+local krTab = Window:Tab({Title = "『动物捉迷藏』", Icon = "zap"})
+krTab:Button({Title = "动物捉迷藏", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%8A%A8%E7%89%A9%E6%8D%89%E8%BF%B7%E8%97%8F.lua"))() end})
+
+local kiTab = Window:Tab({Title = "『黑暗欺骗』", Icon = "zap"})
+kiTab:Button({Title = "黑暗欺骗", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/Hunted.lua"))() end})
+
+local kwTab = Window:Tab({Title = "『元素大亨』", Icon = "zap"})
+kwTab:Button({Title = "元素大亨", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%85%83%E7%B4%A0%E5%8A%9B%E9%87%8F%E5%A4%A7%E4%BA%A8.lua"))() end})
+
+local kuTab = Window:Tab({Title = "『自然灾害黑洞』", Icon = "zap"})
+kuTab:Button({Title = "黑洞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V6.txt"))() end})
+
+local mneTab = Window:Tab({Title = "『建造一架飞机』", Icon = "zap"})
+mneTab:Button({Title = "刷钱", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%BB%BA%E9%80%A0%E4%B8%80%E6%9E%B6%E9%A3%9E%E6%9C%BA"))()end})
+
+local AntiCheatTab = Window:Tab({Title = "反检测", Icon = "zap"})
+
 local function setupAntiCheatBypass()
     local fakeEnv = {
         VERSION = "Luau",
@@ -41,270 +944,25 @@ local function setupAntiCheatBypass()
             end
         end
     end
-
-    print("反作弊绕过系统已加载")
 end
 
-local OrionLib
-local sources = {
-    "https://raw.githubusercontent.com/shlexware/Orion/main/source",
-    "https://pastebin.com/raw/FUEx0f3G",
-    "https://raw.githubusercontent.com/ItzzExcel/Preview/main/Orion",
-    "https://raw.githubusercontent.com/SmellOfHand/Orion/main/source",
-    "https://raw.githubusercontent.com/OrionLib/Orion/main/source",
-    "https://pastebin.com/raw/5Jp0pD0x"
-}
-
-for i, source in ipairs(sources) do
-    local success, result = pcall(function()
-        return loadstring(game:HttpGet(source))()
-    end)
-    if success then
-        OrionLib = result
-        break
-    end
-end
-
-local Window = OrionLib:MakeWindow({Name = "郝蕾脚本 v2.3", HidePremium = false, SaveConfig = false, IntroEnabled = false})
-
-local player = game.Players.LocalPlayer
-
-game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="正在加载脚本做好的脚本有更多的资源"; Duration = 2; })wait(3)
-game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="付费版,包含了市面上大部分脚本"; Duration = 2; })wait(2)
-game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="载入成功"; Duration = 3; })
-
-local InfoTab = Window:MakeTab({Name = "信息", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-InfoTab:AddLabel("郝蕾脚本")
-InfoTab:AddLabel("作者：郝蕾")
-InfoTab:AddLabel("师傅江砚辰")
-InfoTab:AddLabel("作者qq3131827878")
-InfoTab:AddLabel("账户信息")
-InfoTab:AddLabel("你的账号:"..player.AccountAge.."世纪")
-InfoTab:AddLabel("你的用户名:"..game.Players.LocalPlayer.Character.Name)
-InfoTab:AddLabel("服务器名称:"..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
-
-local ScriptsTab = Window:MakeTab({Name = "脚本合集", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-ScriptsTab:AddButton({Name = "鱼脚本", Callback = function()
-    loadstring(game:HelpGet(utf8.char((function() return table.unpack({104,116,116,112,115,58,47,47,115,104,122,46,97,108,47,126,70,105,115,104,83,99,114,105,112,116,78,101,119})end)())))();
-end})
-ScriptsTab:AddButton({Name = "皮脚本", Callback = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaopi77/xiaopi77/main/QQ1002100032-Roblox-Pi-script.lua"))()
-end})
-ScriptsTab:AddButton({Name = "星河脚本", Callback = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/AWDX-DYVB/test/main/%E6%B2%B3%E6%B5%81%E6%97%A0%E5%AF%86%E9%92%A5.lua"))()
-end})
-ScriptsTab:AddButton({Name = "静心脚本", Callback = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/jxdjbx/gggggghjjnbb/main/jdjdd"))()
-end})
-ScriptsTab:AddButton({Name = "冷脚本", Callback = function()
-    getgenv().Leng="冷脚本QQ群815883059" loadstring(game:HttpGet("https://raw.githubusercontent.com/odhdshhe/lenglenglenglenglenglenglenglenglenglenglengleng-cold-script-LBT-H/refs/heads/main/LENG-cold-script-LBT-H.txt"))()
-end})
-ScriptsTab:AddButton({Name = "XK脚本", Callback = function()
-    loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\121\99\103\99\104\103\121\102\121\116\100\116\116\114\47\115\104\101\110\113\105\110\47\114\101\102\115\47\104\101\97\100\115\47\109\97\105\110\47\72\69\46\108\117\97\34\41\41\40\41")()
-end})
-ScriptsTab:AddButton({Name = "也是脚本但不知道名", Callback = function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/KwARpDxV",true))()
-end})
-ScriptsTab:AddButton({Name = "动感星期五", Callback = function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/KwARpDxV",true))()
-end})
-
-local UniversalTab = Window:MakeTab({Name = "通用", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-UniversalTab:AddButton({Name = "甩人", Callback = function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
-end})
-UniversalTab:AddButton({Name = "替身", Callback = function()
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/SkrillexMe/SkrillexLoader/main/SkrillexLoadMain')))()
-end})
-UniversalTab:AddButton({Name = "爬墙", Callback = function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
-end})
-UniversalTab:AddButton({Name = "汉化阿尔宙斯自瞄", Callback = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/sgbs/main/%E4%B8%81%E4%B8%81%20%E6%B1%89%E5%8C%96%E8%87%AA%E7%9E%84.txt"))()
-end})
-UniversalTab:AddButton({Name = "工具挂", Callback = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Bebo-Mods/BeboScripts/main/StandAwekening.lua"))()
-end})
-UniversalTab:AddButton({Name = "甩飞", Callback = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/hknvh/main/%E7%94%A9%E9%A3%9E.txt"))()
-end})
-UniversalTab:AddButton({Name = "铁拳", Callback = function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'))()
-end})
-UniversalTab:AddSlider({Name = "设置重力", Min = 196.2, Max = 1000, Default = 196.2, Color = Color3.fromRGB(255,255,255), Increment = 1, ValueName = "重力值", Callback = function(val) game.Workspace.Gravity = val end})
-UniversalTab:AddSlider({Name = "跳跃高度", Min = 50, Max = 400, Default = 50, Color = Color3.fromRGB(255,255,255), Increment = 1, ValueName = "高度", Callback = function(val) spawn(function() while task.wait() do game.Players.LocalPlayer.Character.Humanoid.JumpPower = val end end) end})
-UniversalTab:AddSlider({Name = "步行速度", Min = 16, Max = 400, Default = 16, Color = Color3.fromRGB(255,255,255), Increment = 1, ValueName = "速度", Callback = function(val) spawn(function() while task.wait() do game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = val end end) end})
-UniversalTab:AddToggle({Name = "夜视", Default = false, Callback = function(Value) if Value then game.Lighting.Ambient = Color3.new(1, 1, 1) else game.Lighting.Ambient = Color3.new(0, 0, 0) end end})
-UniversalTab:AddToggle({Name = "自动互动", Default = false, Callback = function(state) if state then autoInteract = true while autoInteract do for _, descendant in pairs(workspace:GetDescendants()) do if descendant:IsA("ProximityPrompt") then fireproximityprompt(descendant) end end task.wait(0.25) end else autoInteract = false end end})
-
-local DoorsTab = Window:MakeTab({Name = "doors", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-DoorsTab:AddButton({Name = "最强汉化", Callback = function() loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\112\97\115\116\101\98\105\110\46\99\111\109\47\114\97\119\47\54\53\84\119\84\56\106\97"))() end})
-
-local NinjaTab = Window:MakeTab({Name = "忍者传奇", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-NinjaTab:AddButton({Name = "忍者传奇1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/-/refs/heads/main/hao1.lua"))() end})
-NinjaTab:AddButton({Name = "传送", Callback = function() loadstring(game:HttpGet("https://pastebin.com/raw/UzaUDSPK"))() end})
-
-local PrisonTab = Window:MakeTab({Name = "越狱", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-PrisonTab:AddButton({Name = "越狱", Callback = function() loadstring(game:GetObjects("rbxassetid://3762448307")[1].Source)() end})
-
-local SpeedTab = Window:MakeTab({Name = "极速传奇", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-SpeedTab:AddButton({Name = "1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/TtmScripter/GoodScript/main/LegendOfSpeed(Chinese)"))() end})
-SpeedTab:AddButton({Name = "2", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/TtmScripter/Legend-of-Speed-Auto-/main/GetPet"))() end})
-
-local PressureTab = Window:MakeTab({Name = "『压力』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-PressureTab:AddButton({Name = "压力1", Callback = function() loadstring(game:HttpGet("https://pastebin.com/raw/Ej3U4LbA"))() end})
-PressureTab:AddButton({Name = "压力2", Callback = function() loadstring(game:HttpGet(('https://github.com/DocYogurt/Main/raw/main/Scripts/Pressure')))() end})
-
-local DustyTab = Window:MakeTab({Name = "『尘土飞扬的旅行』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-DustyTab:AddButton({Name = "尘土飞扬的旅行1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/AbdouGG/dustytripv1/main/beta"))() end})
-DustyTab:AddButton({Name = "尘土飞扬的旅行2", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/artemy133563/Utilities/main/ADustyTrip",true))() end})
-
-local DeathBallTab = Window:MakeTab({Name = "『死亡球』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-DeathBallTab:AddButton({Name = "死亡球1", Callback = function() loadstring(game:HttpGet("https://github.com/Hosvile/InfiniX/releases/latest/download/main.lua",true))() end})
-
-local CarDealerTab = Window:MakeTab({Name = "『汽车经销大亨』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-CarDealerTab:AddButton({Name = "刷星星", Callback = function() loadstring(game:HttpGet("https://scriptblox.com/raw/LIMITED!-Car-Dealership-Tycoon-Moon-Team-16181"))() end})
-CarDealerTab:AddButton({Name = "汽车经销大亨1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/IExpIoit/Script/main/Car%20Dealership%20Tycoon.lua"))() end})
-
-local LumberTab = Window:MakeTab({Name = "『伐木大亨』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-LumberTab:AddButton({Name = "伐木大亨1", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoYunCN/UWU/main/LuaWare.lua", true))() end})
-
-local AXTab = Window:MakeTab({Name = "『AX』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-AXTab:AddButton({Name = "ax所有功能内有ohio", Callback = function() loadstring(game:HttpGet("https://raw.gitcode.com/Xingtaiduan/Scripts/raw/main/Loader.lua"))() end})
-
-local ChineseTab = Window:MakeTab({Name = "『郝蕾脚本大全』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-ChineseTab:AddButton({Name = "99虚空", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/99%E5%A4%9C%E8%99%9A%E7%A9%BA.txt"))() end})
-ChineseTab:AddButton({Name = "死铁轨", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E6%AD%BB%E9%93%81%E8%BD%A8.lua"))() end})
-ChineseTab:AddButton({Name = "墨水游戏", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E6%B1%89%E5%8C%96%E5%A2%A8%E6%B0%B4Ringta.txt"))() end})
-ChineseTab:AddButton({Name = "活了7天", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E4%B8%83%E6%97%A5%E7%94%9F%E6%88%90kkk.txt"))() end})
-ChineseTab:AddButton({Name = "BF", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/bf.txt"))() end})
-ChineseTab:AddButton({Name = "偷走脑红", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/hdjsjjdgrhj/script-hub/refs/heads/main/偷走脑红"))() end})
-ChineseTab:AddButton({Name = "战争大亨", Callback = function() loadstring(game:HttpGet("https://pastefy.app/hDfjNmLP/raw"))() end})
-ChineseTab:AddButton({Name = "DOORs", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/VelocityX.lua"))() end})
-ChineseTab:AddButton({Name = "跳跃对决", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E8%B7%B3%E8%B7%83%E5%AF%B9%E5%86%B3.txt"))() end})
-ChineseTab:AddButton({Name = "刀刃球", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/ArgonHubX.lua"))() end})
-ChineseTab:AddButton({Name = "造船寻宝", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/zcxb.lua"))() end})
-ChineseTab:AddButton({Name = "自然灾害", Callback = function() loadstring(game:HttpGet'https://raw.githubusercontent.com/RunDTM/ZeeroxHub/main/Loader.lua')() end})
-ChineseTab:AddButton({Name = "最强战场隐身", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/VexonHub%E6%B1%89%E5%8C%96.txt"))() end})
-ChineseTab:AddButton({Name = "最强战场无视平a", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/10tempest01/tempest-hub/refs/heads/main/Launcher.lua"))() end})
-ChineseTab:AddButton({Name = "最强战场火车头", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/ATrainSounds/refs/heads/main/ATrain.lua"))() end})
-
-local csTab = Window:MakeTab({Name = "『无敌少侠飞行R15』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-csTab:AddButton({Name = "飞行1", Callback = function() loadstring(game:HttpGet("https://gist.githubusercontent.com/JungleScripts/8dc95c7ce10e86d353d606334a77de88/raw/08f3e2967701463da36f2fc28e9943e63799dd3f/gistfile1.txt"))() end})
-csTab:AddButton({Name = "飞行2", Callback = function() loadstring(game:HttpGet("https://gist.githubusercontent.com/JungleScripts/775c6366d91d39fe2633c5805a1d0c23/raw/c8de949402393510a27bcf4482c957b6c3bed2c2/gistfile1.txt"))() end})
-csTab:AddButton({Name = "飞行不能停下来", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invinicible-Flight-R15-45414"))() end})
-
-local lolTab = Window:MakeTab({Name = "『吃掉世界』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-lolTab:AddButton({Name = "ccat", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/LED/refs/heads/main/%E5%90%83%E7%95%8C.lua"))() end})
-
-local fytTab = Window:MakeTab({Name = "『终极战场』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-fytTab:AddButton({Name = "Xi PRO", Callback = function() loadstring(game:HttpGet("http://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/免费/终极战场.lua"))() end})
-
-local nTab = Window:MakeTab({Name = "『偷走脑红朝霞』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-nTab:AddButton({Name = "偷走脑红朝霞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/7891.lua"))() end})
-nTab:AddButton({Name = "朝霞免费私服", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/yoursvexyyy/VEX-OP/refs/heads/main/free%20server%20finder"))() end})
-nTab:AddButton({Name = "偷走脑红朝霞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/9178.lua"))() end})
-
-local bTab = Window:MakeTab({Name = "『恐鬼症』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bTab:AddButton({Name = "恐鬼症", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/1111/refs/heads/main/%E6%81%90%E9%AC%BC%E7%97%87.lua"))() end})
-
-local gTab = Window:MakeTab({Name = "『海战』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-gTab:AddButton({Name = "海战", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/海战.lua"))() end})
-
-local hTab = Window:MakeTab({Name = "『俄亥俄州』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-hTab:AddButton({Name = "俄亥俄州", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/俄亥俄州.lua"))() end})
-
-local qwTab = Window:MakeTab({Name = "『监狱人生』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-qwTab:AddButton({Name = "监狱人生", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/监狱人生.lua"))() end})
-
-local bnTab = Window:MakeTab({Name = "『奶奶』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bnTab:AddButton({Name = "奶奶", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/奶奶.lua"))() end})
-
-local buTab = Window:MakeTab({Name = "『彩虹朋友』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-buTab:AddButton({Name = "彩虹朋友", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/彩虹朋友.lua"))() end})
-
-local byuTab = Window:MakeTab({Name = "『破坏者谜团』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-byuTab:AddButton({Name = "破坏者谜团", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/破坏者谜团2.lua"))() end})
-
-local bytuTab = Window:MakeTab({Name = "『死亡之夜』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bytuTab:AddButton({Name = "死亡之夜", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/-/refs/heads/main/%E6%AD%BB%E4%BA%A1%E4%B9%8B%E6%AD%BB(%E5%A4%9A%E5%96%9D%E6%B0%B4%E6%B1%89%E5%8C%96).lua"))() end})
-
-local bkTab = Window:MakeTab({Name = "『巴掌大战』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bkTab:AddButton({Name = "巴掌大战", Callback = function() loadstring(game:HttpGet(("https://raw.githubusercontent.com/Dusty1234567890/Guide/main/Guide")))() end})
-
-local bmuTab = Window:MakeTab({Name = "『修仙模拟器』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bmuTab:AddButton({Name = "修仙模拟器", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/1111/refs/heads/main/%E4%BF%AE%E4%BB%99%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%84%9A%E6%9C%AC%E5%BC%80%E6%BA%90.txt"))() end})
-
-local bmruTab = Window:MakeTab({Name = "『格蕾丝』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bmruTab:AddButton({Name = "格蕾丝", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/XiaoXuAnZang/XKscript/refs/heads/main/GraceXJ.lua"))() end})
-
-local bfuTab = Window:MakeTab({Name = "『一路向西』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bfuTab:AddButton({Name = "一路向西", Callback = function() loadstring(game:HttpGet("https://pastebin.com/raw/0SKKXLB7"))() end})
-
-local bnuTab = Window:MakeTab({Name = "『FPE』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bnuTab:AddButton({Name = "FPE", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/FPE-S.lua"))() end})
-
-local biuTab = Window:MakeTab({Name = "『种植花园』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-biuTab:AddButton({Name = "走马观灯", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E8%8A%B1%E5%9B%AD.lua"))() end})
-
-local bcuTab = Window:MakeTab({Name = "『在超市生活一周』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bcuTab:AddButton({Name = "缝合出品", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%9C%A8%E8%B6%85%E5%B8%82%E7%94%9F%E6%B4%BB%E4%B8%80%E5%91%A8.lua"))() end})
-
-local bitTab = Window:MakeTab({Name = "『住宅大屠杀』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bitTab:AddButton({Name = "缝合出品", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E4%BD%8F%E5%AE%85%E5%A4%A7%E5%B1%A0%E6%9D%80.lua"))() end})
-
-local bruTab = Window:MakeTab({Name = "『矿井』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bruTab:AddButton({Name = "缝合出品", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E7%9F%BF%E4%BA%95.lua"))() end})
-
-local miuTab = Window:MakeTab({Name = "『河北唐县』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-miuTab:AddButton({Name = "缝合出品", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/a%20%E6%B2%B3%E5%8C%97%E5%94%90%E5%8E%BF.lua"))() end})
-
-local tuTab = Window:MakeTab({Name = "『战斗勇士』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-tuTab:AddButton({Name = "自制", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E6%88%98%E6%96%97%E5%8B%87%E5%A3%AB.lua"))() end})
-
-local bsTab = Window:MakeTab({Name = "『躲避』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-bsTab:AddButton({Name = "躲避", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E8%BA%B2%E9%81%BF.lua"))() end})
-
-local byTab = Window:MakeTab({Name = "『植物大战僵尸』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-byTab:AddButton({Name = "朝霞汉化", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/7878"))() end})
-
-local kyTab = Window:MakeTab({Name = "『墨水游戏』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-kyTab:AddButton({Name = "墨水游戏", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/墨水游戏.lua"))() end})
-
-local krTab = Window:MakeTab({Name = "『动物捉迷藏』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-krTab:AddButton({Name = "动物捉迷藏", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%8A%A8%E7%89%A9%E6%8D%89%E8%BF%B7%E8%97%8F.lua"))() end})
-
-local kiTab = Window:MakeTab({Name = "『黑暗欺骗』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-kiTab:AddButton({Name = "黑暗欺骗", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/Hunted.lua"))() end})
-
-local kwTab = Window:MakeTab({Name = "『元素大亨』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-kwTab:AddButton({Name = "元素大亨", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%85%83%E7%B4%A0%E5%8A%9B%E9%87%8F%E5%A4%A7%E4%BA%A8.lua"))() end})
-
-local kuTab = Window:MakeTab({Name = "『自然灾害黑洞』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-kuTab:AddButton({Name = "黑洞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V6.txt"))() end})
-
-local mneTab = Window:MakeTab({Name = "『建造一架飞机』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-mneTab:AddButton({Name = "刷钱", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%BB%BA%E9%80%A0%E4%B8%80%E6%9E%B6%E9%A3%9E%E6%9C%BA"))()end})
-
-local AntiCheatTab = Window:MakeTab({Name = "反检测", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-
-AntiCheatTab:AddButton({Name = "刷新反作弊绕过", Callback = function()
+AntiCheatTab:Button({Title = "刷新反作弊绕过", Callback = function()
     setupAntiCheatBypass()
-    OrionLib:MakeNotification({
-        Name = "反作弊系统",
-        Content = "反作弊绕过已刷新",
+    Window:Notify({
+        Title = "反作弊系统",
+        Desc = "反作弊绕过已刷新",
         Time = 3
     })
 end})
 
-AntiCheatTab:AddToggle({Name = "隐藏注入环境", Default = false, Callback = function(state)
+AntiCheatTab:Toggle({Title = "隐藏注入环境", Default = false, Callback = function(state)
     if state then
         if setidentity then
             setidentity(2)
         end
-        OrionLib:MakeNotification({
-            Name = "隐藏注入环境",
-            Content = "已启用",
+        Window:Notify({
+            Title = "隐藏注入环境",
+            Desc = "已启用",
             Time = 3
         })
     else
@@ -314,23 +972,17 @@ AntiCheatTab:AddToggle({Name = "隐藏注入环境", Default = false, Callback =
     end
 end})
 
-AntiCheatTab:AddButton({Name = "清理环境痕迹", Callback = function()
+AntiCheatTab:Button({Title = "清理环境痕迹", Callback = function()
     collectgarbage()
-    OrionLib:MakeNotification({
-        Name = "环境清理",
-        Content = "环境痕迹已清理完成",
+    Window:Notify({
+        Title = "环境清理",
+        Desc = "环境痕迹已清理完成",
         Time = 3
     })
 end})
 
-OrionLib:MakeNotification({
-    Name = "郝蕾脚本 v2.3",
-    Content = "加载完成！反作弊绕过系统已激活",
+Window:Notify({
+    Title = "郝蕾脚本 v2.3",
+    Desc = "加载完成！反作弊绕过系统已激活",
     Time = 5
 })
-
-if OrionLib and OrionLib.Init then
-    OrionLib:Init()
-else
-    print("UI初始化完成")
-end
