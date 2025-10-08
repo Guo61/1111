@@ -1,3 +1,50 @@
+local function setupAntiCheatBypass()
+    local fakeEnv = {
+        VERSION = "Luau",
+        PLATFORM = "Windows",
+        SCRIPT_CONTEXT = "CoreScript"
+    }
+    
+    if getfenv then
+        local originalGetFenv = getfenv
+        getfenv = function(level)
+            if level and type(level) == "number" and level > 0 then
+                return originalGetFenv(level)
+            end
+            local cleanEnv = {}
+            setmetatable(cleanEnv, {__index = _G})
+            return cleanEnv
+        end
+    end
+
+    if hookfunction then
+        local originalHook = hookfunction
+        hookfunction = function(func, newfunc)
+            local success, result = pcall(originalHook, func, newfunc)
+            if success then
+                return result
+            end
+            return func
+        end
+    end
+
+    local protectedFunctions = {"writefile", "readfile", "loadstring", "getconnections"}
+    for _, funcName in ipairs(protectedFunctions) do
+        if _G[funcName] then
+            local originalFunc = _G[funcName]
+            _G[funcName] = function(...)
+                local success, result = pcall(originalFunc, ...)
+                if success then
+                    return result
+                end
+                return nil
+            end
+        end
+    end
+
+    print("反作弊绕过系统已加载")
+end
+
 local OrionLib
 local sources = {
     "https://raw.githubusercontent.com/shlexware/Orion/main/source",
@@ -238,6 +285,49 @@ kuTab:AddButton({Name = "黑洞", Callback = function() loadstring(game:HttpGet(
 
 local mneTab = Window:MakeTab({Name = "『建造一架飞机』", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 mneTab:AddButton({Name = "刷钱", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E5%BB%BA%E9%80%A0%E4%B8%80%E6%9E%B6%E9%A3%9E%E6%9C%BA"))()end})
+
+local AntiCheatTab = Window:MakeTab({Name = "反检测", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+
+AntiCheatTab:AddButton({Name = "刷新反作弊绕过", Callback = function()
+    setupAntiCheatBypass()
+    OrionLib:MakeNotification({
+        Name = "反作弊系统",
+        Content = "反作弊绕过已刷新",
+        Time = 3
+    })
+end})
+
+AntiCheatTab:AddToggle({Name = "隐藏注入环境", Default = false, Callback = function(state)
+    if state then
+        if setidentity then
+            setidentity(2)
+        end
+        OrionLib:MakeNotification({
+            Name = "隐藏注入环境",
+            Content = "已启用",
+            Time = 3
+        })
+    else
+        if setidentity then
+            setidentity(8)
+        end
+    end
+end})
+
+AntiCheatTab:AddButton({Name = "清理环境痕迹", Callback = function()
+    collectgarbage()
+    OrionLib:MakeNotification({
+        Name = "环境清理",
+        Content = "环境痕迹已清理完成",
+        Time = 3
+    })
+end})
+
+OrionLib:MakeNotification({
+    Name = "郝蕾脚本 v2.3",
+    Content = "加载完成！反作弊绕过系统已激活",
+    Time = 5
+})
 
 if OrionLib and OrionLib.Init then
     OrionLib:Init()
