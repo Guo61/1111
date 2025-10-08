@@ -865,9 +865,9 @@ lolTab:Button({Title = "ccat", Callback = function() loadstring(game:HttpGet("ht
 local fytTab = Window:Tab({Title = "『终极战场』", Icon = "zap"})
 fytTab:Button({Title = "Xi PRO", Callback = function() loadstring(game:HttpGet("http://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/免费/终极战场.lua"))() end})
 
-local nTab = Window:Tab({Title = "『偷走脑红朝霞』", Icon = "zap"})
-nTab:Button({Title = "偷走脑红朝霞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/7891.lua"))() end})
-nTab:Button({Title = "朝霞免费私服", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/yoursvexyyy/VEX-OP/refs/heads/main/free%20server%20finder"))() end})
+local nTab = Window:Tab({Title = "『通用私服偷走脑红』", Icon = "zap"})
+nTab:Button({Title = "偷走脑红帝卡", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/djbx687/114514888/refs/heads/main/帝卡脑红汉化.txt"))()
+nTab:Button({Title = "朝霞免费私服", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/9191"))() end})
 nTab:Button({Title = "偷走脑红朝霞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/9178.lua"))() end})
 
 local bTab = Window:Tab({Title = "『恐鬼症』", Icon = "zap"})
@@ -931,7 +931,7 @@ local bsTab = Window:Tab({Title = "『躲避』", Icon = "zap"})
 bsTab:Button({Title = "躲避", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E8%BA%B2%E9%81%BF.lua"))() end})
 
 local byTab = Window:Tab({Title = "『植物大战僵尸』", Icon = "zap"})
-byTab:Button({Title = "朝霞汉化", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/7878"))() end})
+byTab:Button({Title = "朝霞汉化", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/7878%20(1)"))() end})
 
 local kyTab = Window:Tab({Title = "『墨水游戏』", Icon = "zap"})
 kyTab:Button({Title = "墨水游戏", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/墨水游戏.lua"))() end})
