@@ -1,34 +1,57 @@
 local function setupAntiCheatBypass()
-    local fakeEnv = {
-        VERSION = "Luau",
-        PLATFORM = "Windows",
-        SCRIPT_CONTEXT = "CoreScript"
-    }
-    
-    if getfenv then
-        local originalGetFenv = getfenv
-        getfenv = function(level)
-            if level and type(level) == "number" and level > 0 then
-                return originalGetFenv(level)
-            end
-            local cleanEnv = {}
-            setmetatable(cleanEnv, {__index = _G})
-            return cleanEnv
+    if setidentity then
+        for i = 1, 10 do
+            spawn(function()
+                setidentity(2)
+            end)
         end
     end
 
     if hookfunction then
         local originalHook = hookfunction
         hookfunction = function(func, newfunc)
-            local success, result = pcall(originalHook, func, newfunc)
-            if success then
-                return result
-            end
+            local success = pcall(originalHook, func, newfunc)
             return func
         end
     end
 
-    local protectedFunctions = {"writefile", "readfile", "loadstring", "getconnections"}
+    if debug and debug.getinfo then
+        local originalGetInfo = debug.getinfo
+        debug.getinfo = function(func, what)
+            local info = originalGetInfo(func, what)
+            if info and info.source then
+                if string.find(info.source, "Ninja") or string.find(info.source, "注入") then
+                    info.source = "=[C]"
+                end
+            end
+            return info
+        end
+    end
+
+    local oldNamecall
+    if metatable and getmetatable(game) then
+        oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+            local method = getnamecallmethod()
+            local args = {...}
+            
+            if method == "FireServer" then
+                local remoteName = tostring(self)
+                if string.find(remoteName:lower(), "anticheat") or 
+                   string.find(remoteName:lower(), "report") or
+                   string.find(remoteName:lower(), "security") then
+                    return nil
+                end
+            end
+            
+            if method == "Kick" and self == game.Players.LocalPlayer then
+                return nil
+            end
+
+            return oldNamecall(self, ...)
+        end)
+    end
+
+    local protectedFunctions = {"writefile", "readfile", "loadstring", "getconnections", "getgc", "getreg"}
     for _, funcName in ipairs(protectedFunctions) do
         if _G[funcName] then
             local originalFunc = _G[funcName]
@@ -41,15 +64,249 @@ local function setupAntiCheatBypass()
             end
         end
     end
-    
-    if setidentity then
-        setidentity(2)
+
+    if getfenv then
+        local originalGetFenv = getfenv
+        getfenv = function(level)
+            if level and type(level) == "number" and level > 0 then
+                return originalGetFenv(level)
+            end
+            local env = {}
+            local mt = {
+                __index = function(t, k)
+                    if k == "script" then return nil end
+                    return _G[k]
+                end,
+                __newindex = function(t, k, v)
+                    rawset(t, k, v)
+                end
+            }
+            setmetatable(env, mt)
+            return env
+        end
     end
-    
+
+    if getgenv then
+        getgenv().INJECTED = nil
+        getgenv().CHEATING = nil
+        getgenv().EXPLOIT = nil
+    end
+
     return true
 end
 
-local bypassSuccess = pcall(setupAntiCheatBypass)
+local function setupRemoteProtection()
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    
+    local function sanitizeRemote(remote)
+        if remote:IsA("RemoteEvent") or remote:IsA("RemoteFunction") then
+            local oldFire = remote.FireServer
+            remote.FireServer = function(self, ...)
+                local args = {...}
+                local shouldBlock = false
+                
+                for _, arg in ipairs(args) do
+                    if type(arg) == "string" then
+                        if string.find(arg:lower(), "inject") or
+                           string.find(arg:lower(), "cheat") or
+                           string.find(arg:lower(), "exploit") then
+                            shouldBlock = true
+                            break
+                        end
+                    end
+                end
+                
+                if not shouldBlock then
+                    return oldFire(self, ...)
+                end
+            end
+        end
+    end
+
+    for _, obj in pairs(ReplicatedStorage:GetDescendants()) do
+        sanitizeRemote(obj)
+    end
+
+    ReplicatedStorage.DescendantAdded:Connect(sanitizeRemote)
+end
+
+local function debugAntiCheatFailure()
+    local function testFunction(funcName)
+        local exists = type(_G[funcName]) == "function"
+        return exists
+    end
+    
+    local criticalFunctions = {
+        "setidentity", "hookfunction", "hookmetamethod", 
+        "getnamecallmethod", "getgenv", "getreg"
+    }
+    
+    local availableFunctions = {}
+    for _, func in ipairs(criticalFunctions) do
+        if testFunction(func) then
+            table.insert(availableFunctions, func)
+        end
+    end
+    
+    return availableFunctions
+end
+
+local function createFallbackBypass()
+    local fallbackSuccess = true
+    
+    if getgenv then
+        getgenv().SCRIPT_LOADED = true
+        getgenv().DEBUG_MODE = true
+    end
+    
+    if setidentity then
+        local success = pcall(function()
+            setidentity(2)
+        end)
+        fallbackSuccess = fallbackSuccess and success
+    end
+    
+    if getrenv then
+        local renv = getrenv()
+        if renv and type(renv) == "table" then
+            renv.INJECTED = nil
+            renv.CHEATING = nil
+        end
+    end
+    
+    local function safeHookEvent(eventName, callback)
+        local success, result = pcall(function()
+            local event = game:GetService(eventName)
+            if event then
+                event:Connect(callback)
+                return true
+            end
+        end)
+        return success
+    end
+    
+    safeHookEvent("Players", function(player)
+        if player == game.Players.LocalPlayer then
+            player.Kick:Connect(function()
+                return nil
+            end)
+        end
+    end)
+    
+    return fallbackSuccess
+end
+
+local function enhancedAntiCheatBypass()
+    local debugInfo = debugAntiCheatFailure()
+    if #debugInfo == 0 then
+        return createFallbackBypass()
+    end
+    
+    local bypassModules = {}
+    
+    if hookmetamethod then
+        local success = pcall(function()
+            local oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+                local method = getnamecallmethod()
+                if method == "Kick" and self == game.Players.LocalPlayer then
+                    return nil
+                end
+                return oldNamecall(self, ...)
+            end)
+            table.insert(bypassModules, "防踢出")
+        end)
+    end
+    
+    if setidentity then
+        local success = pcall(function()
+            spawn(function()
+                setidentity(2)
+            end)
+        end)
+        table.insert(bypassModules, "身份伪装")
+    end
+    
+    if getgenv then
+        pcall(function()
+            local env = getgenv()
+            env.__ANTICHEAT_LOADED = true
+            env.__DEBUG_MODE = true
+        end)
+        table.insert(bypassModules, "环境清理")
+    end
+    
+    collectgarbage("collect")
+    
+    return #bypassModules > 0
+end
+
+local function setupRobustAntiCheat()
+    local maxRetries = 3
+    local retryDelay = 1
+    
+    for attempt = 1, maxRetries do
+        local success = enhancedAntiCheatBypass()
+        
+        if success then
+            local remoteSuccess = pcall(setupRemoteProtection)
+            local mainSuccess = pcall(setupAntiCheatBypass)
+            
+            if mainSuccess or remoteSuccess then
+                return true
+            end
+        end
+        
+        if attempt < maxRetries then
+            wait(retryDelay)
+            retryDelay = retryDelay * 2
+        end
+    end
+    
+    return createFallbackBypass()
+end
+
+local function cleanEnvironment()
+    if getgenv then
+        for k, v in pairs(getgenv()) do
+            if type(k) == "string" and (string.find(k:lower(), "inject") or 
+               string.find(k:lower(), "cheat") or 
+               string.find(k:lower(), "exploit")) then
+                getgenv()[k] = nil
+            end
+        end
+    end
+    
+    if getreg then
+        for _, v in pairs(getreg()) do
+            if type(v) == "table" then
+                for k2, v2 in pairs(v) do
+                    if type(k2) == "string" and (string.find(k2:lower(), "inject") or 
+                       string.find(k2:lower(), "cheat")) then
+                        v[k2] = nil
+                    end
+                end
+            end
+        end
+    end
+    
+    collectgarbage()
+end
+
+local bypassSuccess = setupRobustAntiCheat()
+
+if bypassSuccess then
+    game:GetService("StarterGui"):SetCore("SendNotification",{
+        Title = "郝蕾脚本",
+        Text = "反作弊绕过已激活",
+        Duration = 3
+    })
+else
+    game:GetService("StarterGui"):SetCore("SendNotification",{
+        Title = "郝蕾脚本",
+        Text = "使用基础保护模式",
+        Duration = 3
+    })
+end
 
 game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="正在加载脚本做好的脚本有更多的资源"; Duration = 2; })wait(3)
 game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="付费版,包含了市面上大部分脚本"; Duration = 2; })wait(2)
@@ -947,68 +1204,36 @@ mneTab:Button({Title = "刷钱", Callback = function() loadstring(game:HttpGet("
 
 local AntiCheatTab = Window:Tab({Title = "反检测", Icon = "zap"})
 
-local function setupAntiCheatBypass()
-    local fakeEnv = {
-        VERSION = "Luau",
-        PLATFORM = "Windows",
-        SCRIPT_CONTEXT = "CoreScript"
-    }
+AntiCheatTab:Button({Title = "刷新反检测系统", Callback = function()
+    local success = setupRobustAntiCheat()
     
-    if getfenv then
-        local originalGetFenv = getfenv
-        getfenv = function(level)
-            if level and type(level) == "number" and level > 0 then
-                return originalGetFenv(level)
-            end
-            local cleanEnv = {}
-            setmetatable(cleanEnv, {__index = _G})
-            return cleanEnv
-        end
+    if success then
+        Window:Notify({
+            Title = "反检测系统",
+            Desc = "反检测系统已全面激活",
+            Time = 5
+        })
+    else
+        Window:Notify({
+            Title = "反检测系统",
+            Desc = "使用基础保护模式",
+            Time = 5
+        })
     end
-
-    if hookfunction then
-        local originalHook = hookfunction
-        hookfunction = function(func, newfunc)
-            local success, result = pcall(originalHook, func, newfunc)
-            if success then
-                return result
-            end
-            return func
-        end
-    end
-
-    local protectedFunctions = {"writefile", "readfile", "loadstring", "getconnections"}
-    for _, funcName in ipairs(protectedFunctions) do
-        if _G[funcName] then
-            local originalFunc = _G[funcName]
-            _G[funcName] = function(...)
-                local success, result = pcall(originalFunc, ...)
-                if success then
-                    return result
-                end
-                return nil
-            end
-        end
-    end
-end
-
-AntiCheatTab:Button({Title = "刷新反作弊绕过", Callback = function()
-    setupAntiCheatBypass()
-    Window:Notify({
-        Title = "反作弊系统",
-        Desc = "反作弊绕过已刷新",
-        Time = 3
-    })
 end})
 
 AntiCheatTab:Toggle({Title = "隐藏注入环境", Default = false, Callback = function(state)
     if state then
         if setidentity then
-            setidentity(2)
+            for i = 1, 5 do
+                spawn(function()
+                    setidentity(2)
+                end)
+            end
         end
         Window:Notify({
             Title = "隐藏注入环境",
-            Desc = "已启用",
+            Desc = "环境伪装已启用",
             Time = 3
         })
     else
@@ -1018,17 +1243,114 @@ AntiCheatTab:Toggle({Title = "隐藏注入环境", Default = false, Callback = f
     end
 end})
 
-AntiCheatTab:Button({Title = "清理环境痕迹", Callback = function()
-    collectgarbage()
+AntiCheatTab:Button({Title = "深度清理环境", Callback = function()
+    cleanEnvironment()
     Window:Notify({
         Title = "环境清理",
-        Desc = "环境痕迹已清理完成",
+        Desc = "深度环境清理完成",
         Time = 3
     })
 end})
 
-Window:Notify({
-    Title = "郝蕾脚本 v2.3",
-    Desc = "加载完成！反作弊绕过系统已激活",
-    Time = 5
-})
+AntiCheatTab:Toggle({Title = "防踢出保护", Default = true, Callback = function(state)
+    if state then
+        if not getgenv().AntiKickHook then
+            getgenv().AntiKickHook = true
+            local oldNamecall
+            oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+                local method = getnamecallmethod()
+                if method == "Kick" and self == game.Players.LocalPlayer then
+                    return nil
+                end
+                return oldNamecall(self, ...)
+            end)
+        end
+        Window:Notify({
+            Title = "防踢出保护",
+            Desc = "踢出保护已启用",
+            Time = 3
+        })
+    else
+        getgenv().AntiKickHook = false
+    end
+end})
+
+AntiCheatTab:Toggle({Title = "拦截反作弊报告", Default = true, Callback = function(state)
+    if state then
+        if not getgenv().BlockReports then
+            getgenv().BlockReports = true
+            local oldNamecall
+            oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+                local method = getnamecallmethod()
+                if method == "FireServer" then
+                    local remoteName = tostring(self)
+                    if string.find(remoteName:lower(), "anticheat") or 
+                       string.find(remoteName:lower(), "report") then
+                        return nil
+                    end
+                end
+                return oldNamecall(self, ...)
+            end)
+        end
+        Window:Notify({
+            Title = "报告拦截",
+            Desc = "反作弊报告拦截已启用",
+            Time = 3
+        })
+    else
+        getgenv().BlockReports = false
+    end
+end})
+
+AntiCheatTab:Button({Title = "诊断系统状态", Callback = function()
+    local availableFuncs = debugAntiCheatFailure()
+    local status = {}
+    
+    if getgenv().AntiKickHook then
+        table.insert(status, "✓ 防踢出保护")
+    else
+        table.insert(status, "✗ 防踢出保护")
+    end
+    
+    if getgenv().BlockReports then
+        table.insert(status, "✓ 报告拦截")
+    else
+        table.insert(status, "✗ 报告拦截")
+    end
+    
+    if #availableFuncs > 3 then
+        table.insert(status, "✓ 高级功能")
+    else
+        table.insert(status, "⚠ 基础功能")
+    end
+    
+    Window:Notify({
+        Title = "系统状态",
+        Desc = table.concat(status, "\n") .. "\n可用函数: " .. #availableFuncs,
+        Time = 5
+    })
+end})
+
+AntiCheatTab:Button({Title = "安全模式", Callback = function()
+    Window:Notify({
+        Title = "安全模式",
+        Desc = "启动最小化安全保护...",
+        Time = 3
+    })
+    
+    local success = createFallbackBypass()
+    
+    if success then
+        Window:Notify({
+            Title = "安全模式",
+            Desc = "基础保护已激活",
+            Time = 5
+        })
+    else
+        Window:Notify({
+            Title = "安全模式",
+            Desc = "保护启动失败",
+            Time = 5
+        })
+    end
+end})
