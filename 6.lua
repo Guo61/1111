@@ -51,6 +51,10 @@ end
 
 local bypassSuccess = pcall(setupAntiCheatBypass)
 
+game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="正在加载脚本做好的脚本有更多的资源"; Duration = 2; })wait(3)
+game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="付费版,包含了市面上大部分脚本"; Duration = 2; })wait(2)
+game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="载入成功"; Duration = 3; })
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/x2zu/OPEN-SOURCE-UI-ROBLOX/refs/heads/main/X2ZU%20UI%20ROBLOX%20OPEN%20SOURCE/DummyUi-leak-by-x2zu/fetching-main/Tools/Framework.luau"))()
 
 local Window = Library:Window({
@@ -67,10 +71,6 @@ local Window = Library:Window({
         Text = "打开/关闭"
     }
 })
-
-game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="正在加载脚本做好的脚本有更多的资源"; Duration = 2; })wait(3)
-game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="付费版,包含了市面上大部分脚本"; Duration = 2; })wait(2)
-game:GetService("StarterGui"):SetCore("SendNotification",{ Title = "郝蕾脚本"; Text ="载入成功"; Duration = 3; })
 
 local MainTab = Window:Tab({Title = "主页", Icon = "crown"})
 
@@ -860,7 +860,7 @@ local fytTab = Window:Tab({Title = "『终极战场』", Icon = "zap"})
 fytTab:Button({Title = "Xi PRO", Callback = function() loadstring(game:HttpGet("http://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/免费/终极战场.lua"))() end})
 
 local nTab = Window:Tab({Title = "『偷走脑红朝霞』", Icon = "zap"})
-nTab:Button({Title = "偷走脑红朝霞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/7891.lua"))() end})
+nTab:Button({Title = "偷走脑红地卡", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/djbx687/114514888/refs/heads/main/帝卡脑红汉化.txt"))() end})
 nTab:Button({Title = "朝霞免费私服", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/yoursvexyyy/VEX-OP/refs/heads/main/free%20server%20finder"))() end})
 nTab:Button({Title = "偷走脑红朝霞", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/9178.lua"))() end})
 
@@ -924,8 +924,8 @@ tuTab:Button({Title = "自制", Callback = function() loadstring(game:HttpGet("h
 local bsTab = Window:Tab({Title = "『躲避』", Icon = "zap"})
 bsTab:Button({Title = "躲避", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/%E8%BA%B2%E9%81%BF.lua"))() end})
 
-local byTab = Window:Tab({Title = "『植物大战僵尸』", Icon = "zap"})
-byTab:Button({Title = "朝霞汉化", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/342423114514/342423/refs/heads/main/7878"))() end})
+local byTab = Window:Tab({Title = "『植物大战机器人』", Icon = "zap"})
+byTab:Button({Title = "朝霞汉化", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/his/refs/heads/main/7878%20(1)"))() end})
 
 local kyTab = Window:Tab({Title = "『墨水游戏』", Icon = "zap"})
 kyTab:Button({Title = "墨水游戏", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/墨水游戏.lua"))() end})
