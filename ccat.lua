@@ -853,7 +853,7 @@ Tabs.Extra:Button({
     Title = "自动重生和自动刷等级",
     Desc = "单击执行",
     Callback = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/T9wTL150"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Guo61/1111/refs/heads/main/%E8%87%AA%E5%8A%A8%E5%88%B7.lua"))()
         WindUI:Notify({
             Title = "JYC",
             Content = "自动重生和刷等级脚本已加载",
