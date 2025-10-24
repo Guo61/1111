@@ -1031,9 +1031,250 @@ Tabs.Extra:Toggle({
                 Content = "自动卡宠已开启",
                 Duration = 2
             })
+            
+            game.StarterGui:SetCore("SendNotification", { Title = "Advanced Logic"; Text = "请加入684407929{Advanced Logic}购买俄亥俄州最强脚本!" }) 
+            spawn(function() 
+                while wait() do 
+                    game:GetService("ReplicatedStorage").rEvents.rebirthEvent:FireServer("rebirthRequest") 
+                end 
+            end) 
             while _G.Evolve do
-                wait()
-                game.ReplicatedStorage.rEvents.petEvolveEvent:FireServer("evolvePet", "all")
+                wait(0.1)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
+                local A_1 = "collectOrb"
+                local A_2 = "Yellow Orb"
+                local A_3 = "City"
+                local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+                Event:FireServer(A_1, A_2, A_3)
             end
         else
             WindUI:Notify({
