@@ -1,6 +1,6 @@
 {
-  "active": true,
-  "message": "JYC",
+  "active": false,
+  "message": "正在维护中",
   "valid_keys": [
     {
       "key": "JYCNB666NB",
@@ -18,10 +18,10 @@
     },
     {
       "key": "JYCNBB6",
-      "used": false,
-      "user_id": "",
-      "bind_time": "",
-      "last_used": ""
+      "used": true,
+      "user_id": "SIM_USER_8D9NW2AY",
+      "bind_time": "2025/10/25 23:37:32",
+      "last_used": "2025/10/25 23:37:32"
     }
   ],
   "blocked_keys": [],
@@ -39,10 +39,10 @@
       "last_used": ""
     },
     "JYCNBB6": {
-      "user_id": "",
-      "bind_time": "",
-      "used": false,
-      "last_used": ""
+      "user_id": "SIM_USER_8D9NW2AY",
+      "bind_time": "2025/10/25 23:37:32",
+      "used": true,
+      "last_used": "2025/10/25 23:37:32"
     }
   },
   "settings": {
