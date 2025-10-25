@@ -1,6 +1,6 @@
 {
   "active": true,
-  "message": "JYC传奇脚本 - 作者QQ: 3395858053",
+  "message": "JYC",
   "valid_keys": [
     {
       "key": "JYCNB666NB",
@@ -11,6 +11,13 @@
     },
     {
       "key": "JYCNB888NB",
+      "used": false,
+      "user_id": "",
+      "bind_time": "",
+      "last_used": ""
+    },
+    {
+      "key": "JYCNB666",
       "used": false,
       "user_id": "",
       "bind_time": "",
@@ -26,6 +33,12 @@
       "last_used": ""
     },
     "JYCNB888NB": {
+      "user_id": "",
+      "bind_time": "",
+      "used": false,
+      "last_used": ""
+    },
+    "JYCNB666": {
       "user_id": "",
       "bind_time": "",
       "used": false,
