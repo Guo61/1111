@@ -4,10 +4,10 @@
   "valid_keys": [
     {
       "key": "JYCNB666NB",
-      "used": true,
-      "user_id": "SIM_USER_4FA44KGO",
-      "bind_time": "2025/10/25 23:28:42",
-      "last_used": "2025/10/25 23:28:42"
+      "used": false,
+      "user_id": "",
+      "bind_time": "",
+      "last_used": ""
     },
     {
       "key": "JYCNB888NB",
@@ -22,22 +22,15 @@
       "user_id": "",
       "bind_time": "",
       "last_used": ""
-    },
-    {
-      "key": "JYC88",
-      "used": false,
-      "user_id": "",
-      "bind_time": "",
-      "last_used": ""
     }
   ],
   "blocked_keys": [],
   "key_bindings": {
     "JYCNB666NB": {
-      "user_id": "SIM_USER_4FA44KGO",
-      "bind_time": "2025/10/25 23:28:42",
-      "used": true,
-      "last_used": "2025/10/25 23:28:42"
+      "user_id": "",
+      "bind_time": "",
+      "used": false,
+      "last_used": ""
     },
     "JYCNB888NB": {
       "user_id": "",
@@ -46,12 +39,6 @@
       "last_used": ""
     },
     "JYCNBB6": {
-      "user_id": "",
-      "bind_time": "",
-      "used": false,
-      "last_used": ""
-    },
-    "JYC88": {
       "user_id": "",
       "bind_time": "",
       "used": false,
