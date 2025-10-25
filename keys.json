@@ -1,55 +1,56 @@
 {
   "active": true,
-  "message": "JYC传奇脚本 - 作者QQ: 3395858053",
+  "message": "JYC",
   "valid_keys": [
     {
       "key": "JYCNB666NB",
       "used": false,
-      "device_id": "",
       "user_id": "",
-      "bind_time": ""
+      "bind_time": "",
+      "last_used": ""
     },
     {
       "key": "JYCNB888NB",
       "used": false,
-      "device_id": "",
       "user_id": "",
-      "bind_time": ""
+      "bind_time": "",
+      "last_used": ""
     },
     {
       "key": "JYCNB666",
       "used": false,
-      "device_id": "",
       "user_id": "",
-      "bind_time": ""
+      "bind_time": "",
+      "last_used": ""
     }
   ],
   "blocked_keys": [],
   "key_bindings": {
     "JYCNB666NB": {
-      "device_id": "",
       "user_id": "",
       "bind_time": "",
-      "used": false
+      "used": false,
+      "last_used": ""
     },
     "JYCNB888NB": {
-      "device_id": "",
       "user_id": "",
       "bind_time": "",
-      "used": false
+      "used": false,
+      "last_used": ""
     },
     "JYCNB666": {
-      "device_id": "",
       "user_id": "",
       "bind_time": "",
-      "used": false
+      "used": false,
+      "last_used": ""
     }
   },
   "settings": {
-    "max_devices_per_key": 1,
-    "allow_device_change": false,
-    "auto_block_on_suspicious": true
+    "max_users_per_key": 1,
+    "allow_user_change": false,
+    "auto_block_on_suspicious": true,
+    "max_usage_per_day": 50
   },
-  "version": "1.0.0",
+  "version": "1.2.0",
   "last_updated": "2025-10-25"
 }
