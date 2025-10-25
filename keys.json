@@ -4,10 +4,10 @@
   "valid_keys": [
     {
       "key": "JYCNB666NB",
-      "used": false,
-      "user_id": "",
-      "bind_time": "",
-      "last_used": ""
+      "used": true,
+      "user_id": "SIM_USER_4FA44KGO",
+      "bind_time": "2025/10/25 23:28:42",
+      "last_used": "2025/10/25 23:28:42"
     },
     {
       "key": "JYCNB888NB",
@@ -34,10 +34,10 @@
   "blocked_keys": [],
   "key_bindings": {
     "JYCNB666NB": {
-      "user_id": "",
-      "bind_time": "",
-      "used": false,
-      "last_used": ""
+      "user_id": "SIM_USER_4FA44KGO",
+      "bind_time": "2025/10/25 23:28:42",
+      "used": true,
+      "last_used": "2025/10/25 23:28:42"
     },
     "JYCNB888NB": {
       "user_id": "",
