@@ -2,18 +2,43 @@
   "active": true,
   "message": "JYC传奇脚本 - 作者QQ: 3395858053",
   "valid_keys": [
-    "JYCNB666NB",
-    "JYCNB667NB",
-    "JYCNB668NB",
-    "JYCNB669NB",
-    "JYCNB670NB",
-    "JYCNB777NB", 
-    "JYCNB888NB",
-    "JYCNB999NB"
+    {
+      "key": "JYCNB666NB",
+      "used": false,
+      "device_id": "",
+      "user_id": "",
+      "bind_time": ""
+    },
+    {
+      "key": "JYCNB888NB",
+      "used": false,
+      "device_id": "",
+      "user_id": "",
+      "bind_time": ""
+    }
   ],
   "blocked_keys": [
     "JYCNB665NB"
   ],
+  "key_bindings": {
+    "JYCNB666NB": {
+      "device_id": "",
+      "user_id": "",
+      "bind_time": "",
+      "used": false
+    },
+    "JYCNB888NB": {
+      "device_id": "",
+      "user_id": "",
+      "bind_time": "",
+      "used": false
+    }
+  },
+  "settings": {
+    "max_devices_per_key": 1,
+    "allow_device_change": false,
+    "auto_block_on_suspicious": true
+  },
   "version": "1.0.0",
   "last_updated": "2030-01-01"
 }
