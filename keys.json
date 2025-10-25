@@ -1,0 +1,19 @@
+{
+  "active": true,
+  "message": "JYC传奇脚本 - 作者QQ: 3395858053",
+  "valid_keys": [
+    "JYCNB666NB",
+    "JYCNB667NB",
+    "JYCNB668NB",
+    "JYCNB669NB",
+    "JYCNB670NB",
+    "JYCNB777NB", 
+    "JYCNB888NB",
+    "JYCNB999NB"
+  ],
+  "blocked_keys": [
+    "JYCNB665NB"
+  ],
+  "version": "1.0.0",
+  "last_updated": "2030-01-01"
+}
