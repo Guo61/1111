@@ -1,13 +1,56 @@
 {
   "active": true,
-  "message": "JYC传奇脚本 - 作者QQ: 3395858053",
-  "whitelist_users": [
+  "message": "JYC",
+  "valid_keys": [
     {
-      "username": "anqutuwei999",
-      "add_time": "2025/10/26 07:29:59"
+      "key": "JYCNB666NB",
+      "used": false,
+      "user_id": "",
+      "bind_time": "",
+      "last_used": ""
+    },
+    {
+      "key": "JYCNB888NB",
+      "used": false,
+      "user_id": "",
+      "bind_time": "",
+      "last_used": ""
+    },
+    {
+      "key": "JYCNBB6",
+      "used": false,
+      "user_id": "",
+      "bind_time": "",
+      "last_used": ""
     }
   ],
-  "blocked_users": [],
-  "version": "2.0.0",
+  "blocked_keys": [],
+  "key_bindings": {
+    "JYCNB666NB": {
+      "user_id": "",
+      "bind_time": "",
+      "used": false,
+      "last_used": ""
+    },
+    "JYCNB888NB": {
+      "user_id": "",
+      "bind_time": "",
+      "used": false,
+      "last_used": ""
+    },
+    "JYCNBB6": {
+      "user_id": "",
+      "bind_time": "",
+      "used": false,
+      "last_used": ""
+    }
+  },
+  "settings": {
+    "max_users_per_key": 1,
+    "allow_user_change": false,
+    "auto_block_on_suspicious": true,
+    "max_usage_per_day": 50
+  },
+  "version": "1.2.0",
   "last_updated": "2025-10-25"
 }
