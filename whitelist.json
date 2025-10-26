@@ -3,10 +3,6 @@
   "message": "JYC传奇脚本 - 作者QQ: 3395858053",
   "whitelist_users": [
     {
-      "username": "anqutuwei999",
-      "add_time": "2025/10/26 07:32:34"
-    },
-    {
       "username": "igbjg6486",
       "add_time": "2025/10/26 07:35:18"
     },
@@ -15,7 +11,12 @@
       "add_time": "2025/10/26 08:01:50"
     }
   ],
-  "blocked_users": [],
+  "blocked_users": [
+    {
+      "username": "anqutuwei999",
+      "add_time": "2025/10/26 11:08:10"
+    }
+  ],
   "version": "2.0.0",
   "last_updated": "2025-10-26"
 }
