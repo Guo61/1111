@@ -9,13 +9,14 @@
     {
       "username": "201364qwer",
       "add_time": "2025/10/26 08:01:50"
-    },
-    {
-      "username": "anqutuwei999",
-      "add_time": "2025/10/26 20:08:50"
     }
   ],
-  "blocked_users": [],
+  "blocked_users": [
+    {
+      "username": "anqutuwei999",
+      "add_time": "2025/10/26 21:04:55"
+    }
+  ],
   "version": "2.0.0",
-  "last_updated": "2025/10/26 20:25:02"
+  "last_updated": "2025/10/26 21:04:55"
 }
